@@ -1,9 +1,9 @@
 const indexR = require("./index");
-const picassoR = require("./picasso");
+const categoriesR = require("./categories");
 
 
 exports.routesInit = (app) => {
    app.use("/",indexR);
-   app.use("/picasso",picassoR);
+   app.use("/categories",categoriesR);
    
 }
