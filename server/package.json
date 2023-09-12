@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "joi": "^17.10.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.1",
     "mongose": "^0.0.2-security"
   }
