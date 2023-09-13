@@ -1,9 +1,11 @@
 const indexR = require("./index");
-const categoriesR = require("./categories");
+const categoryR = require("./category");
+const linksR = require("./links");
+
 
 
 exports.routesInit = (app) => {
-   app.use("/",indexR);
-   app.use("/categories",categoriesR);
-   
+  app.use("/",indexR);
+  app.use("/category",categoryR);
+  app.use("/links",linksR);
 }
