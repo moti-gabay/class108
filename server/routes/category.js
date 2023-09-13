@@ -34,7 +34,7 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const data = await categoryModel.deleteOne({ _id: id });
-    return res.status(201).json(data);
+    res.status(201).json(data);
   } catch (err) {
     console.log(err);
     res.status(502).json({ err });
@@ -56,15 +56,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const data = await categoryModel.deleteOne({ _id: id });
-    res.status(201).json(data);
-  } catch (err) {
-    console.log(err);
-    res.status(502).json({ err });
-  }
-});
+
 
 module.exports = router;
