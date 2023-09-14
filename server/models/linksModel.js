@@ -5,7 +5,8 @@ const Joi = require("joi");
 const Schema = new mongoose.Schema(
     {
       name: String,
-      url:String
+      url:String,
+      category:String
     }
   );
 
@@ -16,6 +17,7 @@ const Schema = new mongoose.Schema(
     const joiSchema = Joi.object({
       name: Joi.string().min(2).max(50).required(),
       url: Joi.string().min(2).max(999).required(),
+      category: Joi.string().min(2).max(50).required()
     });
     return joiSchema.validate(reqBody);
   };
