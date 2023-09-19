@@ -16,7 +16,15 @@ const Category = () => {
         <CardLink/>
         <CardLink/>
       </Typography>
-       
+      <Typography fontSize={30} sx={{borderBottom:1 ,display:"flex",justifyContent:"center"}} >
+     שם קטגוריה:LIBRARIES
+      </Typography>
+      <Typography sx={{display:"flex"}} >
+      <CardLink/>
+        <CardLink/>
+        <CardLink/>
+        <CardLink/>
+      </Typography>
     </div>
   )
 }

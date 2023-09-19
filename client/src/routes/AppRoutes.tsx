@@ -4,7 +4,7 @@ import Category from '../components/layout/Category';
 import CardLink from '../components/layout/CardLink';
 import NotFound404 from '../pages/NotFound404';
 import Layout from '../components/layout/Layout';
-
+import Link from "../pages/Link"
 
 
 const AppRoutes = () => {
@@ -14,7 +14,7 @@ const AppRoutes = () => {
     element:<Layout/>,
     children:[
         {path:"/", element:<Category/>},
-        {path:"/cardLink",element:<CardLink/>}
+        {path:"/cardLink",element:<Link/>}
     ]
 },
 {
