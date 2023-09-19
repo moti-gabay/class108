@@ -9,6 +9,10 @@ import { purple } from "@mui/material/colors";
 import { styled } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 
+interface props{
+  
+}
+
 export default function CardLink() {
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
@@ -22,7 +26,7 @@ export default function CardLink() {
     <Card sx={{ minWidth: 247 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} gutterBottom>
-          שם קישור: 
+          תיאור: 
            MUI
         </Typography>
         <Typography variant="h5" component="div">

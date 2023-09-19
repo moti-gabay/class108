@@ -1,13 +1,69 @@
 import { Typography } from "@mui/material";
 import CardLink from "./CardLink";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-
+interface category{
+  _id:string;
+  name:string;
+}
+interface links{
+  category:string;
+  name:string;
+  url:string;
+  _id:string;
+}
 
 const Category = () => {
+const [category,setCategory] = useState<category[]>([{
+  _id:"",
+  name:""
+}])
+const [link,setLink] = useState<links[]>([{
+  category:"",
+  name:"",
+  url:"",
+  _id:"",
+}])
+
+const getCategoryReq = async() => {
+  const {data} = await axios.get("http://localhost:3003/category/categoryList")
+  console.log(data);
+setCategory(data)  
+}
+const getLinkListReq = async() => {
+  const {data} = await axios.get("http://localhost:3003/links/linksList")
+console.log(data);
+
+
+}
+
+  useEffect(()=> {
+getCategoryReq()
+getLinkListReq()
+  },[])
   return (
 
     <div >
-      <Typography fontSize={30} sx={{borderBottom:1 ,display:"flex",justifyContent:"center"}} >
+      {category.map(({name}) => {
+return(
+  <div>
+ <Typography fontSize={30} sx={{borderBottom:1 ,display:"flex"}} >
+  {name}
+   </Typography>
+   <Typography sx={{display:"flex"}} >
+   {link.map((link) => {
+    return (
+      <CardLink/>
+    )
+   })}
+   </Typography>
+  </div>
+ 
+
+)
+      })}
+      {/* <Typography fontSize={30} sx={{borderBottom:1 ,display:"flex",justifyContent:"center"}} >
      שם קטגוריה:LIBRARIES
       </Typography>
       <Typography sx={{display:"flex"}} >
@@ -24,7 +80,7 @@ const Category = () => {
         <CardLink/>
         <CardLink/>
         <CardLink/>
-      </Typography>
+      </Typography> */}
     </div>
   )
 }
