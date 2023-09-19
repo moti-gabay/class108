@@ -8,12 +8,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import { purple } from "@mui/material/colors";
 import { styled } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-
-interface props{
-  
+interface links{
+  category:string;
+  name:string;
+  url:string;
+  _id:string;
+}
+interface Props{
+  category:string;
+  name:string;
+  url:string;
+  _id:string;
 }
 
-export default function CardLink() {
+export default function CardLink(props: Props) {
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: purple[500],
@@ -26,8 +34,10 @@ export default function CardLink() {
     <Card sx={{ minWidth: 247 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} gutterBottom>
-          תיאור: 
-           MUI
+         {props.name}
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} gutterBottom>
+         {props.category}
         </Typography>
         <Typography variant="h5" component="div">
           <ColorButton onClick={()=>nav("/cardLink")} variant="contained">פתיחה</ColorButton>
