@@ -1,10 +1,10 @@
 
 
-type Props = {}
 
-const Link = (props: Props) => {
+const Link = () => {
   return (
     <div>Link</div>
   )
 }
+
 export default Link;

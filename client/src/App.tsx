@@ -1,13 +1,10 @@
-import  Category  from "./components/layout/Category"
-import NavBar from "./components/header/NavBar"
+import AppRoutes from "./routes/AppRoutes"
 
 function App() {
 
   return (
     <div>
-<NavBar/>
-
-<Category/>
+<AppRoutes/>
        
     </div>
   )

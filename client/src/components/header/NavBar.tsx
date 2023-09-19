@@ -79,7 +79,7 @@ export default function PrimarySearchAppBar() {
           >
 <Button variant="contained" color="success">
   הוספה 
-  <Icon fontSize='medium' > <PlusIcon /></Icon>
+  <Icon style={{display:"flex"}} > <PlusIcon fontSize='small' style={{paddingRight:10}}/></Icon>
 </Button>          </IconButton>
          
           <Search>
