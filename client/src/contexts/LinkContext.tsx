@@ -65,8 +65,8 @@ export default function LinkProvider({ children }: LinkProviderProps) {
   };
 
   useEffect(() => {
-    getCategoryReq();
-    getLinkListReq();
+    // getCategoryReq();
+    // getLinkListReq();
   }, []);
 
   return (

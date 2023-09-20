@@ -3,11 +3,11 @@ import Category from "../components/layout/Category";
 import CardLink from "../components/layout/CardLink";
 import NotFound404 from "../pages/NotFound404";
 import Layout from "../components/layout/Layout";
-import Link from "../pages/Link";
 import AddLink from "../forms/addLink";
 import LinkProvider from "../contexts/LinkContext";
 import {useEffect} from "react"
 import axios from "axios";
+import LinkInfo from "../pages/LinkInfo";
 
 const AppRoutes = () => {
   const router = createBrowserRouter([
@@ -16,7 +16,7 @@ const AppRoutes = () => {
       element: <Layout />,
       children: [
         { path: "/", element: <Category /> },
-        { path: "/cardLink", element: <Link /> },
+        { path: "/LinkInfo/:id", element: <LinkInfo /> },
         { path: "/addLink", element: <AddLink /> },
       ],
     },

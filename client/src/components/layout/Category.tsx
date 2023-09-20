@@ -15,7 +15,7 @@ interface linksPro {
 }
 
 const Category = () => {
-  const [toggle,setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
   const [category, setCategory] = useState<category[]>([
     {
       _id: "",
@@ -31,7 +31,24 @@ const Category = () => {
     },
   ]);
 
-  
+  const getCategoryReq = async () => {
+    const { data } = await axios.get(
+      "http://localhost:3003/category/categoryList"
+    );
+    console.log(data);
+    setCategory(data);
+  };
+  const getLinkListReq = async () => {
+    const { data } = await axios.get("http://localhost:3003/links/linksList");
+    console.log(data);
+    setLinks(data);
+  };
+
+  useEffect(() => {
+   // getCategoryReq();
+    //getLinkListReq();
+    console.log(links);
+  }, []);
   return (
     <div>
       {category.map(({ name }) => {
@@ -39,16 +56,15 @@ const Category = () => {
           <div>
             <div>
               <Typography
-              onClick={() => setToggle(true)}
+                onClick={() => setToggle(true)}
                 fontSize={30}
                 sx={{ borderBottom: 1, display: "flex" }}
               >
                 {name}
               </Typography>
             </div>
-         
-            <Typography sx={{ display: "flex" }}>
 
+            <Typography sx={{ display: "flex" }}>
               {links.map(
                 (link) =>
                   link?.category === name && (
@@ -64,24 +80,6 @@ const Category = () => {
           </div>
         );
       })}
-      {/* <Typography fontSize={30} sx={{borderBottom:1 ,display:"flex",justifyContent:"center"}} >
-     שם קטגוריה:LIBRARIES
-      </Typography>
-      <Typography sx={{display:"flex"}} >
-      <CardLink/>
-        <CardLink/>
-        <CardLink/>
-        <CardLink/>
-      </Typography>
-      <Typography fontSize={30} sx={{borderBottom:1 ,display:"flex",justifyContent:"center"}} >
-     שם קטגוריה:LIBRARIES
-      </Typography>
-      <Typography sx={{display:"flex"}} >
-      <CardLink/>
-        <CardLink/>
-        <CardLink/>
-        <CardLink/>
-      </Typography> */}
     </div>
   );
 };
