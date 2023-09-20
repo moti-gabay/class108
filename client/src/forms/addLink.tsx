@@ -3,7 +3,8 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import Typography from "@mui/material/Typography"
+import { Button } from '@mui/material';
 const AddLink: React.FC = () => {
   const [formData, setFormData] = useState({
     input1: '',
@@ -21,6 +22,7 @@ const AddLink: React.FC = () => {
 
   return (
     <FormControl sx={{ m: 1, width: 300, marginX:40 }} >
+     <Typography variant='h4' sx={{marginX:4}}>Add Link Form </Typography>
       <TextField
         name="name"
         label="name"
@@ -54,6 +56,7 @@ const AddLink: React.FC = () => {
           <MenuItem value="option3">Option 3</MenuItem>
         </Select>
       </FormControl>
+      <Button variant='contained' color='success'>Add</Button>
     </FormControl>
   );
 };

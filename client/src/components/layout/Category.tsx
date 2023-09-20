@@ -31,24 +31,7 @@ const Category = () => {
     },
   ]);
 
-  const getCategoryReq = async () => {
-    const { data } = await axios.get(
-      "http://localhost:3003/category/categoryList"
-    );
-    console.log(data);
-    setCategory(data);
-  };
-  const getLinkListReq = async () => {
-    const { data } = await axios.get("http://localhost:3003/links/linksList");
-    console.log(data);
-    setLinks(data);
-  };
-
-  useEffect(() => {
-    getCategoryReq();
-    getLinkListReq();
-    console.log(links);
-  }, []);
+  
   return (
     <div>
       {category.map(({ name }) => {
