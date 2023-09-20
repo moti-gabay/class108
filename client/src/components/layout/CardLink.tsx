@@ -40,7 +40,7 @@ export default function CardLink(props: Props) {
          {props.category}
         </Typography>
         <Typography variant="h5" component="div">
-          <ColorButton onClick={()=>nav("/cardLink")} variant="contained">פתיחה</ColorButton>
+          <ColorButton onClick={()=>nav(`/cardLink/${props._id}`)} variant="contained">פתיחה</ColorButton>
         </Typography>
       </CardContent>
       <CardActions >

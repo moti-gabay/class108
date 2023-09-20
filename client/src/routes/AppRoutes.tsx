@@ -5,7 +5,7 @@ import CardLink from '../components/layout/CardLink';
 import NotFound404 from '../pages/NotFound404';
 import Layout from '../components/layout/Layout';
 import Link from "../pages/Link"
-
+import AddLink from '../forms/addLink';
 
 const AppRoutes = () => {
     const router = createBrowserRouter([
@@ -14,7 +14,8 @@ const AppRoutes = () => {
     element:<Layout/>,
     children:[
         {path:"/", element:<Category/>},
-        {path:"/cardLink",element:<Link/>}
+        {path:"/cardLink",element:<Link/>},
+        {path:"/addLink",element:<AddLink/>},
     ]
 },
 {

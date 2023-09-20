@@ -15,6 +15,7 @@ interface linksPro {
 }
 
 const Category = () => {
+  const [toggle,setToggle] = useState(false)
   const [category, setCategory] = useState<category[]>([
     {
       _id: "",
@@ -40,33 +41,42 @@ const Category = () => {
   const getLinkListReq = async () => {
     const { data } = await axios.get("http://localhost:3003/links/linksList");
     console.log(data);
-    setLinks(data)
+    setLinks(data);
   };
 
   useEffect(() => {
     getCategoryReq();
     getLinkListReq();
+    console.log(links);
   }, []);
   return (
     <div>
       {category.map(({ name }) => {
         return (
           <div>
-            <Typography fontSize={30} sx={{ borderBottom: 1, display: "flex" }}>
-              {name}
-            </Typography>
+            <div>
+              <Typography
+              onClick={() => setToggle(true)}
+                fontSize={30}
+                sx={{ borderBottom: 1, display: "flex" }}
+              >
+                {name}
+              </Typography>
+            </div>
+         
             <Typography sx={{ display: "flex" }}>
-            {/* { links.category === name &&  "moti" } */}
-              {/* {link.map(({ category, name, url, _id }) => {
-                return (
-                  <CardLink
-                    name={name}
-                    category={category}
-                    url={url}
-                    _id={_id}
-                  />
-                );
-              })} */}
+
+              {links.map(
+                (link) =>
+                  link?.category === name && (
+                    <CardLink
+                      name={name}
+                      category={link.category}
+                      url={link.url}
+                      _id={link._id}
+                    />
+                  )
+              )}
             </Typography>
           </div>
         );

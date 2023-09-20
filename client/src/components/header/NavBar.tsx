@@ -10,6 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import { createSvgIcon } from '@mui/material/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,7 +66,7 @@ export default function PrimarySearchAppBar() {
     </svg>,
     'Plus',
   );
-
+const nav = useNavigate()
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -77,7 +78,9 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-<Button variant="contained" color="success">
+<Button
+onClick={() => nav("/addLink")}
+variant="contained" color="success">
   הוספה 
   <Icon style={{display:"flex"}} > <PlusIcon fontSize='small' style={{paddingRight:10}}/></Icon>
 </Button>          </IconButton>
