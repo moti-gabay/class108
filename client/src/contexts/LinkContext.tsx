@@ -7,6 +7,7 @@ import {
   ReactNode,
 } from "react";
 import { useEffect } from "react";
+
 export type Link = {
   name: string;
   url: string;
@@ -14,14 +15,11 @@ export type Link = {
   id: string;
 };
 
-export type Category = {
-  name: string;
-  id: string;
-};
 
 export interface LinkContextInterFace {
   link: Link;
   setLink: Dispatch<SetStateAction<Link>>;
+  AddLinkReq:Dispatch<SetStateAction<Link>>;
 }
 
 const initialState = {
@@ -34,6 +32,7 @@ const initialState = {
     }
   ,
   setLink: (link: Link) => {},
+  AddLinkReq:(link: Link) => {},
 } as LinkContextInterFace;
 
 export const LinkContext = createContext(initialState);
@@ -42,22 +41,31 @@ type LinkProviderProps = {
   children: ReactNode;
 };
 
+
+
+
 export default function LinkProvider({ children }: LinkProviderProps) {
-  const [link, setLink] = useState<Link[]>([
+  const [link, setLink] = useState<Link>(
     {
       name: "",
       url: "",
       category: "",
       id: "",
     },
-  ]);
 
-  const getCategoryReq = async () => {
-    const { data } = await axios.get(
-      "http://localhost:3003/category/categoryList"
-    );
-    console.log(data);
-  };
+  );
+
+
+  const AddLinkReq = async() => {
+    try {
+      const {data} = await axios.post("http://localhost:3003/links/addLink",formData)
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   const getLinkListReq = async () => {
     const { data } = await axios.get("http://localhost:3003/links/linksList");
     console.log(data);
@@ -65,12 +73,11 @@ export default function LinkProvider({ children }: LinkProviderProps) {
   };
 
   useEffect(() => {
-    // getCategoryReq();
-    // getLinkListReq();
+    //getLinkListReq();
   }, []);
 
   return (
-    <LinkContext.Provider value={{ link, setLink }}>
+    <LinkContext.Provider value={{ link, setLink , AddLinkReq }}>
       {children}
     </LinkContext.Provider>
   );

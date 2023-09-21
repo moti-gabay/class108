@@ -10,19 +10,16 @@ import { styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { LinkContext } from "../../contexts/LinkContext";
 import { useContext, useEffect } from "react";
+import { CategoryContext } from "../../contexts/CategoryContext";
+import axios from "axios";
 
-interface links {
-  category: string;
-  name: string;
-  url: string;
-  _id: string;
-}
 interface Props {
   category: string;
   name: string;
   url: string;
   _id: string;
 }
+
 
 export default function CardLink(props: Props) {
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -33,7 +30,18 @@ export default function CardLink(props: Props) {
     },
   }));
 
+  const deleteLink = async() => {
+    try {
+      const {data} = await axios.delete(`http://localhost:3003/links/${props._id}`)
+    console.log(data);
+    
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
   // const { link , setLink } = useContext(LinkContext)
+  // const {category } = useContext(CategoryContext)
 
   const nav = useNavigate();
 
@@ -59,6 +67,7 @@ export default function CardLink(props: Props) {
       </CardContent>
       <CardActions>
         <Button
+        onClick={deleteLink}
           variant="contained"
           color="error"
           endIcon={<DeleteIcon style={{ paddingRight: 10 }} />}

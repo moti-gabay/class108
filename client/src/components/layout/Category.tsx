@@ -1,13 +1,18 @@
 import { Typography } from "@mui/material";
 import CardLink from "./CardLink";
 import { useEffect, useState } from "react";
+import { CategoryContext } from "../../contexts/CategoryContext";
+import { useContext } from "react";
 import axios from "axios";
+import { LinkContext } from "../../contexts/LinkContext";
+import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
 
-interface category {
+interface Category {
   _id: string;
   name: string;
 }
-interface linksPro {
+
+interface LinksPro {
   category: string;
   name: string;
   url: string;
@@ -15,14 +20,18 @@ interface linksPro {
 }
 
 const Category = () => {
+  // const { category } = useContext(CategoryContext)
+  // const {link} = useContext(LinkContext)
   const [toggle, setToggle] = useState(false);
-  const [category, setCategory] = useState<category[]>([
+
+  const [categories, setCategory] = useState<Category[]>([
     {
       _id: "",
       name: "",
     },
   ]);
-  const [links, setLinks] = useState<linksPro[]>([
+
+  const [links, setLinks] = useState<LinksPro[]>([
     {
       category: "",
       name: "",
@@ -30,28 +39,26 @@ const Category = () => {
       _id: "",
     },
   ]);
-
-  const getCategoryReq = async () => {
-    const { data } = await axios.get(
-      "http://localhost:3003/category/categoryList"
-    );
-    console.log(data);
-    setCategory(data);
-  };
-  const getLinkListReq = async () => {
-    const { data } = await axios.get("http://localhost:3003/links/linksList");
+  const getLinksReq = async () => {
+    const { data } = await axios.get(LINK_LIST_ROUTE);
     console.log(data);
     setLinks(data);
   };
 
+  const getCategoryReq = async () => {
+    const { data } = await axios.get(CATEGORY_LIST_ROUTE);
+    console.log(data);
+    setCategory(data);
+  };
+
   useEffect(() => {
-   // getCategoryReq();
-    //getLinkListReq();
-    console.log(links);
+    getCategoryReq();
+    getLinksReq()
   }, []);
+
   return (
     <div>
-      {category.map(({ name }) => {
+      {categories?.map(({ name }) => {
         return (
           <div>
             <div>
@@ -65,14 +72,14 @@ const Category = () => {
             </div>
 
             <Typography sx={{ display: "flex" }}>
-              {links.map(
-                (link) =>
-                  link?.category === name && (
+              {link?.map(
+                (linked) =>
+                  linked?.category === name && (
                     <CardLink
-                      name={name}
-                      category={link.category}
-                      url={link.url}
-                      _id={link._id}
+                      name={linked.name}
+                      category={linked.category}
+                      url={linked.url}
+                      _id={linked._id}
                     />
                   )
               )}
