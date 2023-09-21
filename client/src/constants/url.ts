@@ -3,6 +3,8 @@ const API_URL = 'http://localhost:3003/';
 export const TOKEN_KEY = "token";
 //links
 export const LINK_LIST_ROUTE = API_URL + "links/linksList";
+export const LINK_INFO_ROUTE = API_URL + "links/linkInfo/";
+
 export const ADD_LINK_ROUTE = API_URL + "links/addLink";
 export const DELETE_LINK_ROUTE =API_URL + "links/"
 export const EDIT_LINK_ROUTE = API_URL + "links/";

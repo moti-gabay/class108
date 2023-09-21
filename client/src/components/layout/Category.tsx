@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { CategoryContext } from "../../contexts/CategoryContext";
 import { useContext } from "react";
 import axios from "axios";
-import { LinkContext } from "../../contexts/LinkContext";
 import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
 
 interface Category {
@@ -20,8 +19,7 @@ interface LinksPro {
 }
 
 const Category = () => {
-  // const { category } = useContext(CategoryContext)
-  // const {link} = useContext(LinkContext)
+ 
   const [toggle, setToggle] = useState(false);
 
   const [categories, setCategory] = useState<Category[]>([
@@ -72,7 +70,7 @@ const Category = () => {
             </div>
 
             <Typography sx={{ display: "flex" }}>
-              {link?.map(
+              {links?.map(
                 (linked) =>
                   linked?.category === name && (
                     <CardLink

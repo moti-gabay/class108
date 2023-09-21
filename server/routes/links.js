@@ -3,8 +3,15 @@ const router = express.Router();
 const  {LinksModel,validLinks} = require("../models/linksModel")
 
 
-router.get("/", async(req,res) => {
-    res.json({msg:"Express homepage links"});
+router.get("/linkInfo/:id", async(req,res) => {
+  const {id} = req.params;
+  try {
+    const link = await LinksModel.findOne({ _id: id },{__v:0})
+    res.json( link )
+} catch (error) {
+    console.log(error);
+    res.status(502).json({msg_err:error});
+}
   })
 
   router.get("/linksList", async(req,res) => {

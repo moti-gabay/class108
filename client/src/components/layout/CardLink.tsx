@@ -43,10 +43,9 @@ export default function CardLink(props: Props) {
   // const { link , setLink } = useContext(LinkContext)
   // const {category } = useContext(CategoryContext)
 
-  const nav = useNavigate();
 
   useEffect(() => {}, []);
-
+const nav = useNavigate()
   return (
     <Card sx={{ minWidth: 247 }}>
       <CardContent>
@@ -76,6 +75,7 @@ export default function CardLink(props: Props) {
         </Button>
         <Button
           variant="contained"
+          onClick={()=>nav(`/editLink/${props._id}`)}
           endIcon={<EditIcon style={{ paddingRight: 10 }} />}
         >
           עדכון

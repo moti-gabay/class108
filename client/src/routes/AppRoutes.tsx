@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import LinkInfo from "../pages/LinkInfo";
 import CategoryProvider from "../contexts/CategoryContext";
-
+import EditLink from "../forms/EditLink"
 const AppRoutes = () => {
   const router = createBrowserRouter([
     {
@@ -18,6 +18,7 @@ const AppRoutes = () => {
         { path: "/", element: <Category /> },
         { path: "/LinkInfo/:id", element: <LinkInfo /> },
         { path: "/addLink", element: <AddLink /> },
+        { path: "/editLink/:id", element: <EditLink /> },
       ],
     },
     {
