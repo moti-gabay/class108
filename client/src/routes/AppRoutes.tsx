@@ -9,13 +9,14 @@ import axios from "axios";
 import LinkInfo from "../pages/LinkInfo";
 import CategoryProvider from "../contexts/CategoryContext";
 import EditLink from "../forms/EditLink"
+import Categories from "../components/layout/Category";
 const AppRoutes = () => {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <Category /> },
+        { path: "/", element: <Categories /> },
         { path: "/LinkInfo/:id", element: <LinkInfo /> },
         { path: "/addLink", element: <AddLink /> },
         { path: "/editLink/:id", element: <EditLink /> },
@@ -27,21 +28,21 @@ const AppRoutes = () => {
     },
   ]);
 
-  const getCategoryReq = async () => {
-    const { data } = await axios.get(
-      "http://localhost:3003/category/categoryList"
-    );
-    console.log(data);
-  };
-  const getLinkListReq = async () => {
-    const { data } = await axios.get("http://localhost:3003/links/linksList");
-    console.log(data);
-  };
+  // const getCategoryReq = async () => {
+  //   const { data } = await axios.get(
+  //     "http://localhost:3003/category/categoryList"
+  //   );
+  //   console.log(data);
+  // };
+  // const getLinkListReq = async () => {
+  //   const { data } = await axios.get("http://localhost:3003/links/linksList");
+  //   console.log(data);
+  // };
 
-  useEffect(() => {
-    //  getCategoryReq();
-    // getLinkListReq();
-  }, []);
+  // useEffect(() => {
+  //   //  getCategoryReq();
+  //   // getLinkListReq();
+  // }, []);
 
   return (
     <CategoryProvider>

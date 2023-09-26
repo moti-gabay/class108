@@ -7,14 +7,8 @@ import {
   ReactNode,
 } from "react";
 import { useEffect } from "react";
-
-export type Link = {
-  name: string;
-  url: string;
-  category: string;
-  id: string;
-};
-
+import { LINK_INFO_ROUTE } from "../constants/url";
+import { Link } from "../types/types";
 
 export interface LinkContextInterFace {
   link: Link;
@@ -33,16 +27,13 @@ const initialState = {
   ,
   setLink: (link: Link) => {},
   AddLinkReq:(link: Link) => {},
+  getLinkListReq:(link:Link) => {},
 } as LinkContextInterFace;
 
 export const LinkContext = createContext(initialState);
-
 type LinkProviderProps = {
   children: ReactNode;
 };
-
-
-
 
 export default function LinkProvider({ children }: LinkProviderProps) {
   const [link, setLink] = useState<Link>(
@@ -65,12 +56,30 @@ export default function LinkProvider({ children }: LinkProviderProps) {
       
     }
   }
-
+  const getLinkInfo = async (link : Link) => {
+    try {
+      const { data } = await axios.get(LINK_INFO_ROUTE + link.id);
+    return  data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getLinkListReq = async () => {
     const { data } = await axios.get("http://localhost:3003/links/linksList");
     console.log(data);
     setLink(data);
   };
+  const deleteLink = async (id : string) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:3003/links/${id}`
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   useEffect(() => {
     //getLinkListReq();
@@ -82,3 +91,4 @@ export default function LinkProvider({ children }: LinkProviderProps) {
     </LinkContext.Provider>
   );
 }
+ 

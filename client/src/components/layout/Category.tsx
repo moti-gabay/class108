@@ -4,26 +4,27 @@ import { useEffect, useState } from "react";
 import { CategoryContext } from "../../contexts/CategoryContext";
 import { useContext } from "react";
 import axios from "axios";
-import * as React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
-import { Category, LinksPro } from "../../types/types";
+import { Category, Link } from "../../types/types";
 
 
 
-const Category = () => {
+
+
+const Categories = () => {
 
   const [categories, setCategory] = useState<Category[]>([
     {
-      _id: "",
       name: "",
+      _id: "",
     },
   ]);
 
-  const [links, setLinks] = useState<LinksPro[]>([
+  const [links, setLinks] = useState<Link[]>([
     {
       category: "",
       name: "",
@@ -81,4 +82,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Categories;

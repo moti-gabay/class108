@@ -4,12 +4,12 @@ import { LinkContext } from "../contexts/LinkContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { LINK_INFO_ROUTE } from "../constants/url";
-import { LinksPro } from "../types/types";
+import { Link } from "../types/types";
 
 const LinkInfo = () => {
  
 
-  const [link, setLink] = useState<LinksPro[]>([
+  const [link, setLink] = useState<Link[]>([
     {
       category: "",
       name: "",

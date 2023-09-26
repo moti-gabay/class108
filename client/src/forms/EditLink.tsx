@@ -16,8 +16,7 @@ import {
   EDIT_LINK_ROUTE,
   LINK_INFO_ROUTE,
 } from "../constants/url";
-import Category from "../components/layout/Category";
-import { Link } from "../types/types";
+import { Category, Link } from "../types/types";
 
 const EditLink: React.FC = () => {
   const { id } = useParams(); 

@@ -12,10 +12,10 @@ import { LinkContext } from "../../contexts/LinkContext";
 import { useContext, useEffect } from "react";
 import { CategoryContext } from "../../contexts/CategoryContext";
 import axios from "axios";
-import { Props } from "../../types/types";
+import { Link } from "../../types/types";
 
 
-export default function CardLink(props: Props) {
+export default function CardLink(props: Link) {
  
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
