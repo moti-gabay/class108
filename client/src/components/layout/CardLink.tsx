@@ -20,7 +20,6 @@ interface Props {
   _id: string;
 }
 
-
 export default function CardLink(props: Props) {
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
@@ -30,33 +29,34 @@ export default function CardLink(props: Props) {
     },
   }));
 
-  const deleteLink = async() => {
+  const deleteLink = async () => {
     try {
-      const {data} = await axios.delete(`http://localhost:3003/links/${props._id}`)
-    console.log(data);
-    
+      const { data } = await axios.delete(
+        `http://localhost:3003/links/${props._id}`
+      );
+      console.log(data);
     } catch (error) {
       console.log(error);
-      
     }
-  }
+  };
+
   // const { link , setLink } = useContext(LinkContext)
   // const {category } = useContext(CategoryContext)
 
-
   useEffect(() => {}, []);
-const nav = useNavigate()
+  const nav = useNavigate();
   return (
-    <Card sx={{ minWidth: 247 }}>
+    <Card sx={{ width: 250, margin: 1, background: "#e0e0e0" }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} gutterBottom>
-          {props.name}
+        <Typography sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
+          Name : {props.name}
         </Typography>
-        <Typography sx={{ fontSize: 14 }} gutterBottom>
-          {props.category}
+        <Typography sx={{ fontSize: 20, textAlign: "center" }} gutterBottom>
+          url : {props.url.substring(0, 10)}
         </Typography>
-        <Typography variant="h5" component="div">
+        <Typography fontSize={1} component="div">
           <ColorButton
+            sx={{ marginRight: 9 }}
             onClick={() => nav(`/LinkInfo/${props._id}`)}
             variant="contained"
           >
@@ -66,7 +66,8 @@ const nav = useNavigate()
       </CardContent>
       <CardActions>
         <Button
-        onClick={deleteLink}
+          sx={{ margin: 1 }}
+          onClick={deleteLink}
           variant="contained"
           color="error"
           endIcon={<DeleteIcon style={{ paddingRight: 10 }} />}
@@ -74,8 +75,9 @@ const nav = useNavigate()
           מחיקה
         </Button>
         <Button
+          sx={{ margin: 1 }}
           variant="contained"
-          onClick={()=>nav(`/editLink/${props._id}`)}
+          onClick={() => nav(`/editLink/${props._id}`)}
           endIcon={<EditIcon style={{ paddingRight: 10 }} />}
         >
           עדכון

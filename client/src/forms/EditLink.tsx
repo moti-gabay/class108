@@ -61,7 +61,6 @@ const EditLink: React.FC = () => {
 const getLinkInfo = async() => {
     try {
         const {data} = await axios.get(LINK_INFO_ROUTE+id)
-    console.log(data);
 setFormData(data)
     } catch (error) {
         console.log(error);
@@ -69,10 +68,13 @@ setFormData(data)
     }
 }
 
-  const EditLinkReq = async () => {
+  const EditLinkReq = async () => { 
+    console.log(EDIT_LINK_ROUTE + formData._id);
+
     try {
-      const { data } = await axios.put(EDIT_LINK_ROUTE + id, formData);
+      const { data } = await axios.put(EDIT_LINK_ROUTE + formData._id, formData);      
       console.log(data);
+      nav(-1)
     } catch (error) {
       console.log(error);
     }
@@ -85,6 +87,7 @@ getLinkInfo()
     <FormControl sx={{ m: 1, width: 300, marginX: 40 }}>
       <Typography variant="h4" sx={{ marginX: 4 }}>
         Edit Link Form{" "}
+     
       </Typography>
       <TextField
         name="name"
@@ -114,9 +117,6 @@ getLinkInfo()
           {categories?.map((cate) => {
             return <MenuItem value={cate.name}>{cate.name}</MenuItem>;
           })}
-          {/* <MenuItem value="option1">Option 1</MenuItem>
-          <MenuItem value="option2">Option 2</MenuItem>
-          <MenuItem value="option3">Option 3</MenuItem> */}
         </Select>
       </FormControl>
       <Box display={"flex"} justifyContent={"space-evenly"}>

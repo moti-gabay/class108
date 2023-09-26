@@ -50,7 +50,6 @@ const AddLink: React.FC = () => {
 
   // const { AddLinkReq,link } = useContext(LinkContext);
 // const {category } = useContext(CategoryContext)
-const nav = useNavigate()
 
 const getCategoryReq = async () => {
   const { data } = await axios.get(
@@ -63,11 +62,13 @@ const getCategoryReq = async () => {
 useEffect(() => {
 getCategoryReq()
 },[])
+const nav = useNavigate()
 
 const AddLinkReq = async() => {
   try {
     const {data} = await axios.post("http://localhost:3003/links/addLink",formData)
     console.log(data);
+nav(-1)
   } catch (error) {
     console.log(error);
     
@@ -113,7 +114,7 @@ const AddLinkReq = async() => {
         </Select>
       </FormControl>
       <Box display={"flex" } justifyContent={"space-evenly"}>
-      <Button onClick={AddLinkReq} variant='contained' color='success'>הוסף</Button>
+      <Button onClick={AddLinkReq}  variant='contained' color='success'>הוסף</Button>
       <Button onClick={() => nav(-1)}  variant='contained' color='primary'>חזור</Button>
    
       </Box>
