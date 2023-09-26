@@ -52,7 +52,7 @@ const AddLinkReq = async() => {
   try {
     const {data} = await axios.post("http://localhost:3003/links/addLink",formData)
     console.log(data);
-nav(-1)
+    nav(-1)
   } catch (error) {
     console.log(error);
     

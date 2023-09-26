@@ -59,16 +59,10 @@ const EditLink: React.FC = () => {
   };
 
   const EditLinkReq = async () => {
-    console.log(formData);
-    if (!formData._id) {
-      console.error("Missing _id in formData");
-      return; // Exit early if _id is missing
-    }
-    console.log(EDIT_LINK_ROUTE + formData._id);
-
+delete formData._id;
     try {
       const { data } = await axios.put(
-        EDIT_LINK_ROUTE + formData._id,
+        EDIT_LINK_ROUTE + id,
         formData
       );
       console.log(data);
