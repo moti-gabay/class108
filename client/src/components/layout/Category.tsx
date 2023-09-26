@@ -8,9 +8,9 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
 import { Category, Link } from "../../types/types";
+import Grid from "@mui/material/Grid";
 
 const Categories = () => {
-
   const [categories, setCategory] = useState<Category[]>([
     {
       name: "",
@@ -47,27 +47,32 @@ const Categories = () => {
         return (
           <Accordion>
             <AccordionSummary
-              sx={{ margin: 2, display: "flex" }}
+              sx={{ margin: 2, }}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
               <Typography fontSize={20}>{name}</Typography>
             </AccordionSummary>
-            <AccordionDetails>
-              <Typography sx={{ display: "flex" }}>
-                {links.map(
-                  (linked) =>
-                    linked?.category === name && (
+            <AccordionDetails
+              sx={{ display: "flex", flexWrap: "nowrap", overflowY: "auto" }}
+            >
+              {links.map(
+                (linked) =>
+                  linked?.category === name && (
+                    <Grid
+                      key={linked._id}
+                      sx={{ flex: "0 0 auto", marginRight: 2 }}
+                    >
                       <CardLink
                         name={linked.name}
                         category={linked.category}
                         url={linked.url}
                         _id={linked._id}
                       />
-                    )
-                )}
-              </Typography>
+                    </Grid>
+                  )
+              )}
             </AccordionDetails>
           </Accordion>
         );

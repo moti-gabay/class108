@@ -49,13 +49,13 @@ getCategoryReq()
 const nav = useNavigate()
 
 const AddLinkReq = async() => {
+  delete formData._id;
   try {
     const {data} = await axios.post("http://localhost:3003/links/addLink",formData)
     console.log(data);
     nav(-1)
   } catch (error) {
     console.log(error);
-    
   }
 }
 

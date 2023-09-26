@@ -40,6 +40,7 @@ export default function CardLink(props: Link) {
   useEffect(() => {}, []);
   const nav = useNavigate();
   return (
+    
     <Card sx={{ width: 250, margin: 1, background: "#e0e0e0" }}>
       <CardContent>
         <Typography sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
