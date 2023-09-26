@@ -47,7 +47,7 @@ const Categories = () => {
         return (
           <Accordion>
             <AccordionSummary
-              sx={{ margin: 2, }}
+              sx={{ margin: 2 }}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import {  useEffect } from "react";
 import axios from "axios";
 import { Link } from "../../types/types";
+import { DELETE_LINK_ROUTE } from "../../constants/url";
 
 
 export default function CardLink(props: Link) {
@@ -22,25 +23,28 @@ export default function CardLink(props: Link) {
       backgroundColor: purple[700],
     },
   }));
+  
 
   const deleteLink = async () => {
+    
     try {
-      const { data } = await axios.delete(
-        `http://localhost:3003/links/${props._id}`
-      );
-      console.log(data);
+      if(window.confirm("do you want to delete this link ?")){
+        const { data } = await axios.delete(
+          DELETE_LINK_ROUTE+props._id
+         );
+         console.log(data);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  // const { link , setLink } = useContext(LinkContext)
-  // const {category } = useContext(CategoryContext)
+  useEffect(() => {
 
-  useEffect(() => {}, []);
+  }, []);
   const nav = useNavigate();
   return (
-    
+
     <Card sx={{ width: 250, margin: 1, background: "#e0e0e0" }}>
       <CardContent>
         <Typography sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
@@ -51,6 +55,7 @@ export default function CardLink(props: Link) {
         </Typography>
         <Typography fontSize={1} component="div">
           <ColorButton
+          size="small"
             sx={{ marginRight: 9 }}
             onClick={() => nav(`/LinkInfo/${props._id}`)}
             variant="contained"
@@ -61,6 +66,7 @@ export default function CardLink(props: Link) {
       </CardContent>
       <CardActions>
         <Button
+         size="small"
           sx={{ margin: 1 }}
           onClick={deleteLink}
           variant="contained"
@@ -70,6 +76,7 @@ export default function CardLink(props: Link) {
           מחיקה
         </Button>
         <Button
+         size="small"
           sx={{ margin: 1 }}
           variant="contained"
           onClick={() => nav(`/editLink/${props._id}`)}
