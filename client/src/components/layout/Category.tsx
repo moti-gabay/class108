@@ -10,21 +10,11 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
+import { Category, LinksPro } from "../../types/types";
 
-interface Category {
-  _id: string;
-  name: string;
-}
 
-interface LinksPro {
-  category: string;
-  name: string;
-  url: string;
-  _id: string;
-}
 
 const Category = () => {
-  const [toggle, setToggle] = useState(false);
 
   const [categories, setCategory] = useState<Category[]>([
     {

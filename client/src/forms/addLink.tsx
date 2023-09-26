@@ -13,26 +13,15 @@ import { LinkContext } from '../contexts/LinkContext';
 import { CategoryContext } from '../contexts/CategoryContext';
 import { Box } from '@mui/joy';
 import {  useNavigate } from 'react-router-dom';
+import { Category, Link } from '../types/types';
 
 const AddLink: React.FC = () => {
-  const {  reset, formState: { errors }, } = useForm();
-
-  interface Category {
-    _id: string;
-    name: string;
-  }
-
-  interface Link {
-    category: string;
-    name: string;
-    url: string;
-    _id?: string;
-  }
 
   const [formData, setFormData] = useState<Link>({
     name: '',
     url: '',
     category: '',
+    _id:""
   });
   const [categories, setCategory] = useState<Category[]>([
     {
@@ -76,7 +65,7 @@ nav(-1)
 }
 
   return (
-    <FormControl sx={{ m: 1, width: 300, marginX:40 }} >
+    <FormControl sx={{ m: 1, width: 300, marginX:"35%" }} >
      <Typography variant='h4' sx={{marginX:4}}>Add Link Form </Typography>
       <TextField
         name="name"
