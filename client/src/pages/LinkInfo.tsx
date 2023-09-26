@@ -1,7 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { LinkContext } from "../contexts/LinkContext";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import axios from "axios";
 import { LINK_INFO_ROUTE } from "../constants/url";
 import { Link } from "../types/types";
@@ -9,14 +8,14 @@ import { Link } from "../types/types";
 const LinkInfo = () => {
  
 
-  const [link, setLink] = useState<Link[]>([
+  const [link, setLink] = useState<Link>(
     {
       category: "",
       name: "",
       url: "",
       id: "",
     },
-  ]);
+  );
   const { id } = useParams();
   const nav = useNavigate();
 
@@ -40,13 +39,13 @@ const LinkInfo = () => {
       <Typography
         sx={{ fontSize: 20, display: "flex", justifyContent: "center" }}
       >
-    Name :   {link.name}
+    שם :   {link.name}
 
       </Typography>
       <Typography
         sx={{ fontSize: 20, display: "flex", justifyContent: "center" }}
       >
-        category :  {link.category}
+        קטגוריה :  {link.category}
 
       </Typography>
 

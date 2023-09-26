@@ -1,8 +1,6 @@
 import { Typography } from "@mui/material";
 import CardLink from "./CardLink";
 import { useEffect, useState } from "react";
-import { CategoryContext } from "../../contexts/CategoryContext";
-import { useContext } from "react";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -10,10 +8,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
 import { Category, Link } from "../../types/types";
-
-
-
-
 
 const Categories = () => {
 

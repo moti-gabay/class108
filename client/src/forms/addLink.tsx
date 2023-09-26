@@ -6,11 +6,6 @@ import Select from '@mui/material/Select';
 import Typography from "@mui/material/Typography"
 import { Button } from '@mui/material';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
-
-import {useContext} from "react"
-import { LinkContext } from '../contexts/LinkContext';
-import { CategoryContext } from '../contexts/CategoryContext';
 import { Box } from '@mui/joy';
 import {  useNavigate } from 'react-router-dom';
 import { Category, Link } from '../types/types';
@@ -97,10 +92,7 @@ nav(-1)
     <MenuItem value={cate.name}>{cate.name}</MenuItem>
   )
 })}
-          {/* <MenuItem value="option1">Option 1</MenuItem>
-          <MenuItem value="option2">Option 2</MenuItem>
-          <MenuItem value="option3">Option 3</MenuItem> */}
-        </Select>
+         </Select>
       </FormControl>
       <Box display={"flex" } justifyContent={"space-evenly"}>
       <Button onClick={AddLinkReq}  variant='contained' color='success'>הוסף</Button>

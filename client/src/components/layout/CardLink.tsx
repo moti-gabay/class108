@@ -8,9 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { purple } from "@mui/material/colors";
 import { styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { LinkContext } from "../../contexts/LinkContext";
-import { useContext, useEffect } from "react";
-import { CategoryContext } from "../../contexts/CategoryContext";
+import {  useEffect } from "react";
 import axios from "axios";
 import { Link } from "../../types/types";
 
@@ -45,10 +43,10 @@ export default function CardLink(props: Link) {
     <Card sx={{ width: 250, margin: 1, background: "#e0e0e0" }}>
       <CardContent>
         <Typography sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
-          Name : {props.name}
+          שם : {props.name}
         </Typography>
         <Typography sx={{ fontSize: 20, textAlign: "center" }} gutterBottom>
-          url : {props.url.substring(0, 10)}
+          קישור : {props.url.substring(0, 10)}
         </Typography>
         <Typography fontSize={1} component="div">
           <ColorButton

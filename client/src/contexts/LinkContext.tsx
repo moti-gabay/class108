@@ -13,7 +13,6 @@ import { Link } from "../types/types";
 export interface LinkContextInterFace {
   link: Link;
   setLink: Dispatch<SetStateAction<Link>>;
-  AddLinkReq:Dispatch<SetStateAction<Link>>;
 }
 
 const initialState = {
@@ -22,12 +21,10 @@ const initialState = {
       name: "",
       url: "",
       category: "",
-      id: "",
+      _id: "",
     }
   ,
   setLink: (link: Link) => {},
-  AddLinkReq:(link: Link) => {},
-  getLinkListReq:(link:Link) => {},
 } as LinkContextInterFace;
 
 export const LinkContext = createContext(initialState);
@@ -86,7 +83,7 @@ export default function LinkProvider({ children }: LinkProviderProps) {
   }, []);
 
   return (
-    <LinkContext.Provider value={{ link, setLink , AddLinkReq }}>
+    <LinkContext.Provider value={{ link, setLink }}>
       {children}
     </LinkContext.Provider>
   );

@@ -6,9 +6,6 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import axios from "axios";
-import { useContext } from "react";
-import { LinkContext } from "../contexts/LinkContext";
-import { CategoryContext } from "../contexts/CategoryContext";
 import { Box } from "@mui/joy";
 import { useNavigate, useParams } from "react-router-dom";
 import {
