@@ -82,10 +82,10 @@ const nav = useNavigate()
 onClick={() => nav("/addLink")}
 variant="contained" color="success">
   הוספה 
-  <Icon style={{display:"flex"}} > <PlusIcon fontSize='small' style={{paddingRight:10}}/></Icon>
+  <Icon style={{display:"flex"}} > <PlusIcon fontSize='small' style={{paddingRight:7}}/></Icon>
 </Button>          </IconButton>
          
-          <Search>
+          {/* <Search>
             <SearchIconWrapper >
               <SearchIcon     />
             </SearchIconWrapper>
@@ -93,7 +93,7 @@ variant="contained" color="success">
               placeholder="חפש..."
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
          
           <Typography
