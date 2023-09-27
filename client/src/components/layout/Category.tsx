@@ -1,4 +1,4 @@
-import { Input, Typography, alpha, styled } from "@mui/material";
+import { Typography, alpha, filledInputClasses, styled } from "@mui/material";
 import CardLink from "./CardLink";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -9,62 +9,43 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
 import { Category, Link } from "../../types/types";
 import Grid from "@mui/material/Grid";
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
+import SearchIcon from "@mui/icons-material/Search";
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  top:'-50px',
-  right:'150px',
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  top: "-50px",
+  right: "150px",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '80%',
-  [theme.breakpoints.up('sm')]: {
+  width: "80%",
+  [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: '30%',
+    width: "30%",
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 25),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const Categories = () => {
+  const [search, setSearch] = useState("");
+  const [items, setItems] = useState<any[]>([
+   
+  ]);
+  const searchRef = useRef<HTMLInputElement | null>(null);
 
-  const [search, setSearch] = useState('');
-  const searchRef = useRef<HTMLInputElement | null >(null);
-
-  const handleSearch = () => {
-    setSearch(searchRef.current.value);
-  } 
-
-
-  
   const [categories, setCategory] = useState<Category[]>([
     {
       name: "",
@@ -91,34 +72,31 @@ const Categories = () => {
   };
 
   const onInput = () => {
-      console.log(searchRef.current?.value);
-  }
-
+    setSearch(searchRef.current.value);
+  };
+  
   useEffect(() => {
     getCategoryReq();
     getLinksReq();
-    console.log(searchRef.current?.value);
   }, []);
-
+  let filterCategories = categories.filter((item) =>
+  item.name.toLowerCase().includes(search.toLowerCase())
+);
   return (
     <div>
-       
-       <Search
-       >
-            <SearchIconWrapper
-             >
-              <SearchIcon     />
-            </SearchIconWrapper>
-   
-            <input placeholder="  חפש…  "
-            className="form-control color-"
-                        onChange={onInput}
-                        ref={searchRef}
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
 
-                        />
-         
-          </Search>
-      {categories.map(({ name }) => {
+        <input
+          placeholder="  חפש…  "
+          className="form-control color-"
+          onChange={onInput}
+          ref={searchRef}
+        />
+      </Search>
+      {filterCategories.map(({ name }) => {
         return (
           <Accordion>
             <AccordionSummary
