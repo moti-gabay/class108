@@ -1,4 +1,4 @@
-import { Typography, alpha, filledInputClasses, styled } from "@mui/material";
+import { Input, Typography, alpha, filledInputClasses, styled } from "@mui/material";
 import CardLink from "./CardLink";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -41,18 +41,13 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const Categories = () => {
   const [search, setSearch] = useState("");
-  const [items, setItems] = useState<any[]>([
-   
-  ]);
   const searchRef = useRef<HTMLInputElement | null>(null);
-
   const [categories, setCategory] = useState<Category[]>([
     {
       name: "",
       _id: "",
     },
   ]);
-
   const [links, setLinks] = useState<Link[]>([
     {
       category: "",
@@ -65,23 +60,22 @@ const Categories = () => {
     const { data } = await axios.get(LINK_LIST_ROUTE);
     setLinks(data);
   };
-
   const getCategoryReq = async () => {
     const { data } = await axios.get(CATEGORY_LIST_ROUTE);
     setCategory(data);
   };
-
   const onInput = () => {
     setSearch(searchRef.current.value);
   };
-  
   useEffect(() => {
     getCategoryReq();
     getLinksReq();
   }, []);
-  let filterCategories = categories.filter((item) =>
-  item.name.toLowerCase().includes(search.toLowerCase())
-);
+
+  let filterLinks = links.map((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div>
       <Search>
@@ -89,14 +83,28 @@ const Categories = () => {
           <SearchIcon />
         </SearchIconWrapper>
 
-        <input
+        <Input
           placeholder="  חפש…  "
-          className="form-control color-"
+          // className="form-control"
           onChange={onInput}
           ref={searchRef}
         />
       </Search>
-      {filterCategories.map(({ name }) => {
+      <Typography sx={{display:"flex"}} >
+        {links.map((linked) => {
+          return (
+            <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
+              <CardLink
+                name={linked.name}
+                category={linked.category}
+                url={linked.url}
+                _id={linked._id}
+              />
+            </Grid>
+          );
+        })}
+      </Typography>
+      {categories.map(({ name }) => {
         return (
           <Accordion>
             <AccordionSummary
