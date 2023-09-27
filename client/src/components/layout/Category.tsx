@@ -1,4 +1,4 @@
-import { Typography, alpha, styled } from "@mui/material";
+import { Input, Typography, alpha, styled } from "@mui/material";
 import CardLink from "./CardLink";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -14,6 +14,8 @@ import InputBase from '@mui/material/InputBase';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
+  top:'-50px',
+  right:'150px',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
@@ -21,10 +23,10 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
+  width: '80%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    width: '30%',
   },
 }));
 
@@ -55,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Categories = () => {
 
   const [search, setSearch] = useState('');
-  const searchRef = useRef()
+  const searchRef = useRef<HTMLInputElement | null >(null);
 
   const handleSearch = () => {
     setSearch(searchRef.current.value);
@@ -88,22 +90,33 @@ const Categories = () => {
     setCategory(data);
   };
 
+  const onInput = () => {
+      console.log(searchRef.current?.value);
+  }
+
   useEffect(() => {
     getCategoryReq();
     getLinksReq();
+    console.log(searchRef.current?.value);
   }, []);
 
   return (
     <div>
        
-       <Search>
-            <SearchIconWrapper >
+       <Search
+       >
+            <SearchIconWrapper
+             >
               <SearchIcon     />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="חפש..."
-              inputProps={{ 'aria-label': 'search' }}
-            />
+   
+            <input placeholder="  חפש…  "
+            className="form-control color-"
+                        onChange={onInput}
+                        ref={searchRef}
+
+                        />
+         
           </Search>
       {categories.map(({ name }) => {
         return (
