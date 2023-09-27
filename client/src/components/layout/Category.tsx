@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import CardLink from "./CardLink";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -11,6 +11,16 @@ import { Category, Link } from "../../types/types";
 import Grid from "@mui/material/Grid";
 
 const Categories = () => {
+
+  const [search, setSearch] = useState('');
+  const searchRef = useRef()
+
+  const handleSearch = () => {
+    setSearch(searchRef.current.value);
+  } 
+
+
+  
   const [categories, setCategory] = useState<Category[]>([
     {
       name: "",
