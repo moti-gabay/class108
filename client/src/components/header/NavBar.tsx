@@ -42,7 +42,8 @@ variant="contained" color="success">
 </Button>          </IconButton>
          
           <Box sx={{ textAlign:"canter" , flexGrow: 1 }} />
-         
+                     <img src={img} style={{ padding:"5px",width:"50px" ,borderRadius:"50px"}} alt="" />
+
           <Typography
             variant="h6"
             noWrap
@@ -50,8 +51,7 @@ variant="contained" color="success">
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
 
-            פיתוח IT לאמל"ח 
-            <img src={img} style={{ padding:"5px",width:"50px" ,borderRadius:"50px"}} alt="" />
+          
 
           </Typography>
           <Box sx={{ display: { xs: 'flex', md: 'none', width:"50px",borderRadius:"50px"} }}>
