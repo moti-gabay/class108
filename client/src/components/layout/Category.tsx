@@ -1,6 +1,11 @@
-import { Input, Typography, alpha, filledInputClasses, styled } from "@mui/material";
+import {
+  Input,
+  Typography,
+  alpha,
+  styled,
+} from "@mui/material";
 import CardLink from "./CardLink";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -40,8 +45,8 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const Categories = () => {
+
   const [search, setSearch] = useState("");
-  const searchRef = useRef<HTMLInputElement | null>(null);
   const [categories, setCategory] = useState<Category[]>([
     {
       name: "",
@@ -56,42 +61,61 @@ const Categories = () => {
       _id: "",
     },
   ]);
+  const [filterLinks, setFilterLinks] = useState<Link[]>([
+    {
+      category: "",
+      name: "",
+      url: "",
+      _id: "",
+    },
+  ]);
   const getLinksReq = async () => {
     const { data } = await axios.get(LINK_LIST_ROUTE);
     setLinks(data);
   };
   const getCategoryReq = async () => {
-    const { data } = await axios.get(CATEGORY_LIST_ROUTE);
+    const { data } = await axios.get(CATEGORY_LIST_ROUTE);   
     setCategory(data);
   };
-  const onInput = () => {
-    setSearch(searchRef.current.value);
-  };
+  
+ const input = () => {
+  let  filtered = links.filter((item) => 
+  item.name.toLowerCase().includes(search?.toLowerCase())
+  );
+  setFilterLinks(filtered)
+  console.log(filtered);
+ }
+
   useEffect(() => {
     getCategoryReq();
-    getLinksReq();
-  }, []);
-
-  let filterLinks = links.map((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase())
-  );
+    getLinksReq(); 
+    console.log(search);
+       
+  }, [search]);
 
   return (
     <div>
-      <Search>
+    
+      <Search >
         <SearchIconWrapper>
-          <SearchIcon />
+          <SearchIcon   />
         </SearchIconWrapper>
-
         <Input
           placeholder="  חפש…  "
           // className="form-control"
-          onChange={onInput}
-          ref={searchRef}
+          onInput={input}
+          onChange={(e)=>{setSearch(e.target.value)}}
         />
       </Search>
-      <Typography sx={{display:"flex"}} >
-        {links.map((linked) => {
+      <Typography 
+        style={{display:"flex"}}
+        variant="h5">
+          תוצאות חיפש:
+        </Typography>      <Typography
+        sx={{ display: "flex", flexWrap: "nowrap", overflow: "auto" }}
+      >
+        
+        {filterLinks.map((linked) => {
           return (
             <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
               <CardLink
@@ -104,9 +128,9 @@ const Categories = () => {
           );
         })}
       </Typography>
-      {categories.map(({ name }) => {
+      {categories.map(({ name,_id }) => {
         return (
-          <Accordion>
+          <Accordion key={_id}>
             <AccordionSummary
               sx={{ margin: 2 }}
               expandIcon={<ExpandMoreIcon />}
