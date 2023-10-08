@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import { createSvgIcon } from '@mui/material/utils';
 import { useNavigate } from 'react-router-dom';
-import img from ''../../assets/108img.jpeg"
+import img from '../../assets/108img.jpeg'
 export default function PrimarySearchAppBar() {
    const PlusIcon = createSvgIcon(
     // credit: plus icon from https://heroicons.com/
@@ -41,7 +41,7 @@ variant="contained" color="success">
   <Icon style={{display:"flex"}} > <PlusIcon fontSize='small' style={{paddingRight:7}}/></Icon>
 </Button>          </IconButton>
          
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ textAlign:"canter" , flexGrow: 1 }} />
          
           <Typography
             variant="h6"
@@ -49,10 +49,13 @@ variant="contained" color="success">
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
+
             פיתוח IT לאמל"ח 
+            <img src={img} style={{ padding:"5px",width:"50px" ,borderRadius:"50px"}} alt="" />
+
           </Typography>
-          <Box sx={{ display: { xs: 'flex', md: 'none', width:"100px"} }}>
-           <img src={img} alt="" />
+          <Box sx={{ display: { xs: 'flex', md: 'none', width:"50px",borderRadius:"50px"} }}>
+          {/* <img src={img} style={{width:"50px"}} alt="" /> */}
           </Box>
         </Toolbar>
       </AppBar>
