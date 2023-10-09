@@ -30,20 +30,21 @@ export default function PrimarySearchAppBar() {
   );
   const nav = useNavigate();
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    
+    <Box  sx={{ flexGrow: 1 }}>
+      <AppBar  position="static">
         <Toolbar>
           <IconButton
-            size="small"
+          
             edge="start"
-           
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ }}
+            
           >
-            <Button onClick={() => nav("/addLink")} variant="contained">
-              <Icon style={{ display: "flex" }}>
+            <Button sx={{background:blue[400]}} onClick={() => nav("/addLink")} variant="contained">
+              <Icon  style={{ display: "flex",justifyContent:"center" }}>
                 {" "}
-                <PlusIcon fontSize="small" style={{ paddingRight: 7 }} />
+                <PlusIcon  fontSize="small" style={{ }} />
               </Icon>
             </Button>{" "}
           </IconButton>
@@ -69,6 +70,7 @@ export default function PrimarySearchAppBar() {
               },
             }}
           >
+            momo
           </Box>
         </Toolbar>
       </AppBar>

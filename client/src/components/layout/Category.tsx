@@ -1,6 +1,6 @@
-import { Input, Typography, alpha, styled } from "@mui/material";
+import { Container, Input, Typography, alpha, styled } from "@mui/material";
 import CardLink from "./CardLink";
-import { teal } from '@mui/material/colors';
+import { lightBlue, teal,blue } from '@mui/material/colors';
 
 import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
@@ -95,11 +95,12 @@ const Categories = () => {
   return (
     <div>
       <Search
+      sx={{background:blue[400],marginRight:"100px",border:"1px solid black", borderRadius:"10px" }}
        onClick={() => setSearch("")}
        style={{ width: "240px", marginRight: "30%" }}>
         
         <SearchIconWrapper>
-          <ClearIcon style={{ fontSize:"20px",color:"",background:"" ,borderRadius:"50%"}} />
+        {search !== '' && <ClearIcon style={{ fontSize:"20px",color:"",background:"" ,borderRadius:"50%"}} />}  
         </SearchIconWrapper>
         <Input
           value={search}
@@ -111,13 +112,17 @@ const Categories = () => {
           }}
         />
       </Search>
-      <Typography style={{ display: "flex" }} variant="h5">
-        תוצאות חיפש:
+      <Container sx={{display:"flex",justifyContent:"center"}}>
+      <Typography style={{  }} variant="h5">
+        תוצאות חיפוש:
       </Typography>{" "}
-      <Typography
-        sx={{ display: "flex", flexWrap: "nowrap", overflow: "auto" }}
+      </Container>
+    
+      <Container 
+        sx={{background:blue[100],border:"1px solid black",borderRadius:"10px", display: "flex", flexWrap: "nowrap", overflow: "auto", padding:"10px",width:"80%" }}
       >
-        {search !== "" && filterLinks.map((linked) => {
+        
+        {search !== "" ? filterLinks.map((linked) => {
             return (
               <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
                 <CardLink
@@ -129,11 +134,12 @@ const Categories = () => {
               </Grid>
             );
           
-        })}
-      </Typography>
+        }):"אין תוצאות חיפוש..."}
+      </Container>
+      <Container sx={{padding:"20px",width:"85%"}}>
       {categories.map(({ name, _id }) => {
         return (
-          <Accordion style={{background:teal[100]}} key={_id}>
+<Accordion  style={{background:blue[300]}} key={_id}>
             <AccordionSummary
               sx={{ margin: 2 }}
               expandIcon={<ExpandMoreIcon />}
@@ -163,8 +169,12 @@ const Categories = () => {
               )}
             </AccordionDetails>
           </Accordion>
+          
+          
         );
       })}
+      </Container>
+   
     </div>
   );
 };
