@@ -1,10 +1,8 @@
-import {
-  Input,
-  Typography,
-  alpha,
-  styled,
-} from "@mui/material";
+import { Input, Typography, alpha, styled } from "@mui/material";
 import CardLink from "./CardLink";
+import { teal } from '@mui/material/colors';
+
+import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
@@ -45,7 +43,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const Categories = () => {
-
   const [search, setSearch] = useState("");
   const [categories, setCategory] = useState<Category[]>([
     {
@@ -74,63 +71,69 @@ const Categories = () => {
     setLinks(data);
   };
   const getCategoryReq = async () => {
-    const { data } = await axios.get(CATEGORY_LIST_ROUTE);   
+    const { data } = await axios.get(CATEGORY_LIST_ROUTE);
     setCategory(data);
   };
-  
- const input = () => {
-  let  filtered = links.filter((item) => 
-  item.name.toLowerCase().includes(search?.toLowerCase())
-  );
-  setFilterLinks(filtered)
-  console.log(filtered);
- }
+
+  const input = () => {
+    let filtered = links.filter((item) =>
+      item.name.toLowerCase().includes(search?.toLowerCase())
+    );
+    setFilterLinks(filtered);
+    console.log(filtered);
+  };
 
   useEffect(() => {
     getCategoryReq();
-    getLinksReq(); 
+    getLinksReq();
     console.log(search);
-       
   }, [search]);
-
+  const onClick = () => {
+    setSearch("");
+    console.log("reast");
+  };
   return (
     <div>
-    
-      <Search >
+      <Search
+       onClick={() => setSearch("")}
+       style={{ width: "240px", marginRight: "30%" }}>
+        
         <SearchIconWrapper>
-          <SearchIcon   />
+          <ClearIcon style={{ fontSize:"20px",color:"",background:"" ,borderRadius:"50%"}} />
         </SearchIconWrapper>
         <Input
+          value={search}
           placeholder="  חפש…  "
           // className="form-control"
           onInput={input}
-          onChange={(e)=>{setSearch(e.target.value)}}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
       </Search>
-      <Typography 
-        style={{display:"flex"}}
-        variant="h5">
-          תוצאות חיפש:
-        </Typography>      <Typography
+      <Typography style={{ display: "flex" }} variant="h5">
+        תוצאות חיפש:
+      </Typography>{" "}
+      <Typography
         sx={{ display: "flex", flexWrap: "nowrap", overflow: "auto" }}
       >
-        
-        {filterLinks.map((linked) => {
-          return (
-            <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
-              <CardLink
-                name={linked.name}
-                category={linked.category}
-                url={linked.url}
-                _id={linked._id}
-              />
-            </Grid>
-          );
+        {search !== "" && filterLinks.map((linked) => {
+            return (
+              <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
+                <CardLink
+                  name={linked.name}
+                  category={linked.category}
+                  url={linked.url}
+                  _id={linked._id}
+                />
+              </Grid>
+            );
+          
         })}
       </Typography>
-      {categories.map(({ name,_id }) => {
+      {categories.map(({ name, _id }) => {
         return (
-          <Accordion key={_id}>
+          <Accordion style={{background:teal[100]}} key={_id}>
             <AccordionSummary
               sx={{ margin: 2 }}
               expandIcon={<ExpandMoreIcon />}
