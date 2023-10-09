@@ -103,7 +103,7 @@ const Categories = () => {
         </SearchIconWrapper>
         <Input
           value={search}
-          placeholder="  חפש…  "
+          placeholder="  חיפוש…  "
           // className="form-control"
           onInput={input}
           onChange={(e) => {

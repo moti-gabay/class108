@@ -12,6 +12,7 @@ import {  useEffect } from "react";
 import axios from "axios";
 import { Link } from "../../types/types";
 import { DELETE_LINK_ROUTE } from "../../constants/url";
+import { green } from '@mui/material/colors';
 
 
 export default function CardLink(props: Link) {
@@ -54,17 +55,10 @@ export default function CardLink(props: Link) {
           קישור : {props.url.substring(0, 10)}
         </Typography>
         <Typography fontSize={1} component="div">
-          <ColorButton
-          size="small"
-            sx={{ marginRight: 9 }}
-            onClick={() => nav(`/LinkInfo/${props._id}`)}
-            variant="contained"
-          >
-            פתיחה
-          </ColorButton>
+          
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions style={{display:"flex", justifyContent:"space-evenly"}}>
         <Button
          size="small"
           sx={{ margin: 1 }}
@@ -73,7 +67,7 @@ export default function CardLink(props: Link) {
           color="error"
           endIcon={<DeleteIcon style={{ paddingRight: 10 }} />}
         >
-          מחיקה
+         
         </Button>
         <Button
          size="small"
@@ -82,7 +76,7 @@ export default function CardLink(props: Link) {
           onClick={() => nav(`/editLink/${props._id}`)}
           endIcon={<EditIcon style={{ paddingRight: 10 }} />}
         >
-          עדכון
+          
         </Button>
       </CardActions>
     </Card>

@@ -6,8 +6,7 @@ const Layout = () => {
   return (
     <div>
       <PrimarySearchAppBar/>
-      <Outlet/>
-      <Footer/>
+      <Outlet />
     </div>
   )
 }
