@@ -112,12 +112,16 @@ const Categories = () => {
           }}
         />
       </Search>
+
       <Container sx={{display:"flex",justifyContent:"center"}}>
-      <Typography style={{  }} variant="h5">
-        תוצאות חיפוש:
-      </Typography>{" "}
-      </Container>
     
+     
+      </Container>
+    {search !== "" &&
+    <div>
+<Typography style={{ textAlign:"center" }} variant="h5">
+     תוצאות חיפוש:
+   </Typography>{" "}
       <Container 
         sx={{background:blue[100],border:"1px solid black",borderRadius:"10px", display: "flex", flexWrap: "nowrap", overflow: "auto", padding:"10px",width:"80%" }}
       >
@@ -136,6 +140,8 @@ const Categories = () => {
           
         }):"אין תוצאות חיפוש..."}
       </Container>
+    </div>
+     }
       
       <Container sx={{padding:"20px",width:"85%"}}>
       {categories.map(({ name, _id }) => {
