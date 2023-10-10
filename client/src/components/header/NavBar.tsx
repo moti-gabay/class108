@@ -54,24 +54,7 @@ export default function PrimarySearchAppBar() {
             style={{ padding: "5px", width: "50px", borderRadius: "50px" }}
             alt=""
           />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          ></Typography>
-          <Box
-            sx={{
-              display: {
-                xs: "flex",
-                md: "none",
-                width: "50px",
-                borderRadius: "50px",
-              },
-            }}
-          >
-            momo
-          </Box>
+         
         </Toolbar>
       </AppBar>
     </Box>

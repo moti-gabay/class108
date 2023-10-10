@@ -7,25 +7,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { purple } from "@mui/material/colors";
 import { styled } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {  useEffect } from "react";
 import axios from "axios";
 import { Link } from "../../types/types";
 import { DELETE_LINK_ROUTE } from "../../constants/url";
-import { green } from '@mui/material/colors';
+import { green,blue } from '@mui/material/colors';
 
 
 export default function CardLink(props: Link) {
  
-  const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
-    "&:hover": {
-      backgroundColor: purple[700],
-    },
-  }));
-  
-
   const deleteLink = async () => {
     
     try {
@@ -40,22 +31,20 @@ export default function CardLink(props: Link) {
     }
   };
 
-  useEffect(() => {
-
-  }, []);
   const nav = useNavigate();
+  const onClicked = (id : string) => {
+nav(`/LinkInfo/${id}`)
+  }
+  
   return (
-
-    <Card sx={{ width: 250, margin: 1, background: "#e0e0e0" }}>
+<Button >
+<Card  sx={{ width: 250, margin: 1,background:blue[200] }}>
       <CardContent>
         <Typography sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
           שם : {props.name}
         </Typography>
         <Typography sx={{ fontSize: 20, textAlign: "center" }} gutterBottom>
           קישור : {props.url.substring(0, 10)}
-        </Typography>
-        <Typography fontSize={1} component="div">
-          
         </Typography>
       </CardContent>
       <CardActions style={{display:"flex", justifyContent:"space-evenly"}}>
@@ -67,7 +56,6 @@ export default function CardLink(props: Link) {
           color="error"
           endIcon={<DeleteIcon style={{ paddingRight: 10 }} />}
         >
-         
         </Button>
         <Button
          size="small"
@@ -76,9 +64,10 @@ export default function CardLink(props: Link) {
           onClick={() => nav(`/editLink/${props._id}`)}
           endIcon={<EditIcon style={{ paddingRight: 10 }} />}
         >
-          
         </Button>
       </CardActions>
     </Card>
+</Button>
+   
   );
 }

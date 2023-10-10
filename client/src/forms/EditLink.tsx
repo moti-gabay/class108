@@ -6,7 +6,7 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import axios from "axios";
-import { Box } from "@mui/joy";
+import { Box, Card } from "@mui/joy";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   CATEGORY_LIST_ROUTE,
@@ -14,6 +14,7 @@ import {
   LINK_INFO_ROUTE,
 } from "../constants/url";
 import { Category, Link } from "../types/types";
+import { green,blue } from '@mui/material/colors';
 
 const EditLink: React.FC = () => {
   const { id } = useParams(); 
@@ -76,8 +77,9 @@ delete formData._id;
   }, []);
 
   return (
-    <FormControl sx={{ m: 1, width: 300, marginX:"35%" }}>
-      <Typography variant="h4" sx={{ marginX: 4 }}>
+    <FormControl sx={{ m: 1, width: 300, marginX:"35%",height:"700px",padding:"60px" }} >
+           <Card sx={{background:blue[200]}}>
+           <Typography variant="h4" sx={{ textAlign:"center",padding:2 }}>
         Edit Link Form{" "}
       </Typography>
       <TextField
@@ -118,6 +120,8 @@ delete formData._id;
           חזור
         </Button>
       </Box>
+</Card>
+   
     </FormControl>
   );
 };

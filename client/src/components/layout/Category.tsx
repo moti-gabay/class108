@@ -95,7 +95,7 @@ const Categories = () => {
   return (
     <div>
       <Search
-      sx={{background:blue[400],marginRight:"100px",border:"1px solid black", borderRadius:"10px" }}
+      sx={{background:blue[400],marginRight:"100px",border:"1px solid black",borderRadius:"10px" }}
        onClick={() => setSearch("")}
        style={{ width: "240px", marginRight: "30%" }}>
         
@@ -136,6 +136,7 @@ const Categories = () => {
           
         }):"אין תוצאות חיפוש..."}
       </Container>
+      
       <Container sx={{padding:"20px",width:"85%"}}>
       {categories.map(({ name, _id }) => {
         return (

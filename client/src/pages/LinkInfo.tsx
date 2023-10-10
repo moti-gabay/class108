@@ -1,9 +1,10 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import {  useEffect, useState } from "react";
 import axios from "axios";
 import { LINK_INFO_ROUTE } from "../constants/url";
 import { Link } from "../types/types";
+import { green,blue } from '@mui/material/colors';
 
 const LinkInfo = () => {
  
@@ -36,23 +37,28 @@ const LinkInfo = () => {
 
   return (
     <Typography  sx={{padding:20}}>
+      <Card sx={{background:blue[200]}}>
       <Typography
-        sx={{ fontSize: 20, display: "flex", justifyContent: "center" }}
+        sx={{ fontSize: 50, display: "flex", justifyContent: "center" }}
       >
     שם :   {link.name}
 
       </Typography>
       <Typography
-        sx={{ fontSize: 20, display: "flex", justifyContent: "center" }}
+        sx={{ fontSize: 50, display: "flex", justifyContent: "center" }}
       >
         קטגוריה :  {link.category}
 
       </Typography>
 
+
+      </Card>
+     
       <Button
+      
         variant="contained"
-        sx={{ marginX:"50%", marginY:3 }}
-        onClick={() => nav(-1)}
+        sx={{background:"green", marginX:"50%", marginY:3 }}
+        onClick={() => nav("/")}
       >
         חזרה
       </Button>

@@ -6,9 +6,10 @@ import Select from '@mui/material/Select';
 import Typography from "@mui/material/Typography"
 import { Button } from '@mui/material';
 import axios from 'axios';
-import { Box } from '@mui/joy';
+import { Box, Card } from '@mui/joy';
 import {  useNavigate } from 'react-router-dom';
 import { Category, Link } from '../types/types';
+import { green,blue } from '@mui/material/colors';
 
 const AddLink: React.FC = () => {
 
@@ -60,8 +61,9 @@ const AddLinkReq = async() => {
 }
 
   return (
-    <FormControl sx={{ m: 1, width: 300, marginX:"35%" }} >
-     <Typography variant='h4' sx={{marginX:4}}>Add Link Form </Typography>
+    <FormControl sx={{ m: 1, width: 300, marginX:"35%",height:"700px",padding:"60px" }} >
+     <Card sx={{background:blue[200]}}>
+     <Typography variant='h4' sx={{ textAlign:"center"}}>Add Link Form </Typography>
       <TextField
         name="name"
         label="name"
@@ -99,6 +101,8 @@ const AddLinkReq = async() => {
       <Button onClick={() => nav(-1)}  variant='contained' color='primary'>חזור</Button>
    
       </Box>
+     </Card>
+ 
       </FormControl>
   );
 };
