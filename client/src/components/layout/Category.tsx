@@ -95,12 +95,12 @@ const Categories = () => {
   return (
     <div>
       <Search
-      sx={{background:blue[400],marginRight:"100px",border:"1px solid black",borderRadius:"10px" }}
+      sx={{background:blue[400],marginLeft:"500px",border:"1px solid white",borderRadius:"10px" }}
        onClick={() => setSearch("")}
-       style={{ width: "240px", marginRight: "30%" }}>
+       style={{ width: "240px", marginRight: "" }}>
         
         <SearchIconWrapper>
-        {search !== '' && <ClearIcon style={{ fontSize:"20px",color:"",background:"" ,borderRadius:"50%"}} />}  
+        {search !== '' && <ClearIcon style={{ fontSize:"20px",color:"white",background:"" ,borderRadius:"50%"}} />}  
         </SearchIconWrapper>
         <Input
           value={search}
@@ -113,10 +113,10 @@ const Categories = () => {
         />
       </Search>
 
-      <Container sx={{display:"flex",justifyContent:"center"}}>
+      {/* <Container sx={{display:"flex",justifyContent:"center"}}>
     
      
-      </Container>
+      </Container> */}
     {search !== "" &&
     <div>
 <Typography style={{ textAlign:"center" }} variant="h5">

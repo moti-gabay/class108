@@ -41,10 +41,10 @@ nav(`/LinkInfo/${id}`)
 <Card  sx={{ width: 250, margin: 1,background:blue[200] }}>
       <CardContent>
         <Typography sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
-          שם : {props.name}
+          name :<span>{props.name}</span> 
         </Typography>
         <Typography sx={{ fontSize: 20, textAlign: "center" }} gutterBottom>
-          קישור : {props.url.substring(0, 10)}
+          url : {props.url.substring(0, 10)}
         </Typography>
       </CardContent>
       <CardActions style={{display:"flex", justifyContent:"space-evenly"}}>

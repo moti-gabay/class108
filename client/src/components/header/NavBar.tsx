@@ -41,20 +41,21 @@ export default function PrimarySearchAppBar() {
             sx={{ }}
             
           >
-            <Button sx={{background:blue[400]}} onClick={() => nav("/addLink")} variant="contained">
+             <img
+            src={img}
+            style={{ padding: "px", width: "50px", borderRadius: "50px" ,border:"1px solid white "}}
+            alt=""
+          />
+           
+          </IconButton>
+          <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
+         
+          <Button sx={{background:blue[400]}} onClick={() => nav("/addLink")} variant="contained">
               <Icon  style={{ display: "flex",justifyContent:"center" }}>
                 {" "}
                 <PlusIcon  fontSize="small" style={{ }} />
               </Icon>
             </Button>{" "}
-          </IconButton>
-          <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
-          <img
-            src={img}
-            style={{ padding: "5px", width: "50px", borderRadius: "50px" }}
-            alt=""
-          />
-         
         </Toolbar>
       </AppBar>
     </Box>
