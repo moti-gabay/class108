@@ -9,6 +9,8 @@ import { createSvgIcon } from "@mui/material/utils";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/108img.jpeg";
 import { green ,lightBlue,blue} from "@mui/material/colors";
+import Search from "@mui/icons-material/Search";
+import { Input } from "@mui/material";
 
 export default function PrimarySearchAppBar() {
   const PlusIcon = createSvgIcon(
@@ -29,6 +31,10 @@ export default function PrimarySearchAppBar() {
     "Plus"
   );
   const nav = useNavigate();
+
+  // const { inputValue, setInputValue, clearInput } = useContext(InputContext);
+
+
   return (
     
     <Box  sx={{ flexGrow: 1 }}>
@@ -48,6 +54,7 @@ export default function PrimarySearchAppBar() {
           />
            
           </IconButton>
+        
           <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
          
           <Button sx={{background:blue[400]}} onClick={() => nav("/addLink")} variant="contained">

@@ -12,7 +12,6 @@ import EditLink from "../forms/EditLink"
 import Categories from "../components/layout/Category";
 import { lightBlue, teal,blue } from '@mui/material/colors';
 
-
 const AppRoutes = () => {
   
   const router = createBrowserRouter([
@@ -51,9 +50,12 @@ const AppRoutes = () => {
   return (
     <CategoryProvider>
       <LinkProvider>
-    <div style={{background:blue[100]}}>
+     
+      <div style={{background:blue[100]}}>
         <RouterProvider router={router} />
     </div>
+    
+    
       </LinkProvider>
     </CategoryProvider>
   );

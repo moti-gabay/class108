@@ -95,7 +95,7 @@ const Categories = () => {
   return (
     <div>
       <Search
-      sx={{background:blue[400],marginLeft:"500px",border:"1px solid white",borderRadius:"10px" }}
+      sx={{background:blue[400],position:"relative" ,left:"70px" ,border:"1px solid white",borderRadius:"10px" }}
        onClick={() => setSearch("")}
        style={{ width: "240px", marginRight: "" }}>
         
@@ -103,8 +103,9 @@ const Categories = () => {
         {search !== '' && <ClearIcon style={{ fontSize:"20px",color:"white",background:"" ,borderRadius:"50%"}} />}  
         </SearchIconWrapper>
         <Input
+        sx={{paddingX:"5px"}}
           value={search}
-          placeholder="  חיפוש…  "
+          placeholder="  Search....  "
           // className="form-control"
           onInput={input}
           onChange={(e) => {
@@ -112,11 +113,6 @@ const Categories = () => {
           }}
         />
       </Search>
-
-      {/* <Container sx={{display:"flex",justifyContent:"center"}}>
-    
-     
-      </Container> */}
     {search !== "" &&
     <div>
 <Typography style={{ textAlign:"center" }} variant="h5">
@@ -148,12 +144,13 @@ const Categories = () => {
         return (
 <Accordion  style={{background:blue[300]}} key={_id}>
             <AccordionSummary
+            
               sx={{ margin: 2 }}
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon style={{color:"white"}}/>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography fontSize={20}>{name}</Typography>
+              <Typography fontSize={20} color={"white"} fontWeight="fontWeightBold">{name}</Typography>
             </AccordionSummary>
             <AccordionDetails
               sx={{ display: "flex", flexWrap: "nowrap", overflowY: "auto" }}
