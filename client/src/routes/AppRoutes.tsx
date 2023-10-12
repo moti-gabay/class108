@@ -11,6 +11,7 @@ import CategoryProvider from "../contexts/CategoryContext";
 import EditLink from "../forms/EditLink"
 import Categories from "../components/layout/Category";
 import { lightBlue, teal,blue } from '@mui/material/colors';
+import Add from "../components/layout/Add";
 
 const AppRoutes = () => {
   
@@ -21,7 +22,7 @@ const AppRoutes = () => {
       children: [
         { path: "/", element: <Categories /> },
         // { path: "/LinkInfo/:id", element: <LinkInfo /> },
-        { path: "/addLink", element: <AddLink /> },
+        { path: "/addLink", element: <Add /> },
         { path: "/editLink/:id", element: <EditLink /> },
       ],
     },
@@ -50,12 +51,9 @@ const AppRoutes = () => {
   return (
     <CategoryProvider>
       <LinkProvider>
-     
       <div style={{background:blue[100]}}>
         <RouterProvider router={router} />
     </div>
-    
-    
       </LinkProvider>
     </CategoryProvider>
   );

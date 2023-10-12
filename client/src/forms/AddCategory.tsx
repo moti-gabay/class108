@@ -10,14 +10,12 @@ import { Box, Card } from '@mui/joy';
 import {  useNavigate } from 'react-router-dom';
 import { Category, Link } from '../types/types';
 import { green,blue } from '@mui/material/colors';
+import { ADD_CATEGORY_ROUTE } from '../constants/url';
 
-const AddLink: React.FC = () => {
+const AddCategory = () => {
 
   const [formData, setFormData] = useState<Link>({
-    name: '',
-    url: '',
-    category: '',
-    _id:""
+    name: ""
   });
   const [categories, setCategory] = useState<Category[]>([
     {
@@ -34,25 +32,14 @@ const AddLink: React.FC = () => {
   };
 
   // const { AddLinkReq,link } = useContext(LinkContext);
-// const {category } = useContext(CategoryContext)
+// const {category } = useContext(CategoryContext);
 
-const getCategoryReq = async () => {
-  const { data } = await axios.get(
-    "http://localhost:3003/category/categoryList"
-  );
-  console.log(data);
-  setCategory(data)
-};
-
-useEffect(() => {
-getCategoryReq()
-},[])
 const nav = useNavigate()
 
-const AddLinkReq = async() => {
-  delete formData._id;
+const AddCategoryReq = async() => {
+ 
   try {
-    const {data} = await axios.post("http://localhost:3003/links/addLink",formData)
+    const {data} = await axios.post(ADD_CATEGORY_ROUTE,formData)
     console.log(data);
     nav(-1)
   } catch (error) {
@@ -61,43 +48,22 @@ const AddLinkReq = async() => {
 }
 
   return (
-    <FormControl sx={{ m: 1, width:"50%",text:"white",height:"800px" }} >
+    <FormControl sx={{width:"400px",height:"700px",padding:"60px" }} >
      <Card sx={{background:blue[200]}}>
-     <Typography variant='h4' sx={{ textAlign:"center"}}>Add Link Form </Typography>
+     <Typography variant='h4' sx={{ textAlign:"center"}}>Add Category</Typography>
       <TextField
-        name="name"
-        label="name"
+        name=" name"
+        label="category name"
         variant="outlined"
         fullWidth
         value={formData.name}
         onChange={handleChange}
         margin="normal"
       />
-      <TextField
-        name="url"
-        label="url"
-        variant="outlined"
-        fullWidth
-        value={formData.url}
-        onChange={handleChange}
-        margin="normal"
-      />
-      <FormControl fullWidth variant="outlined" margin="normal">
-        <Select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          label="category"
-        >
-{categories?.map((cate)=> {
-  return (
-    <MenuItem value={cate.name}>{cate.name}</MenuItem>
-  )
-})}
-         </Select>
-      </FormControl>
+     
       <Box display={"flex" } justifyContent={"space-evenly"}>
-      <Button onClick={AddLinkReq}  variant='contained' color='success'>Add</Button>
+      <Button onClick={AddCategoryReq}
+        variant='contained' color='success'>Add</Button>
       <Button onClick={() => nav(-1)}  variant='contained' color='primary'>Back</Button>
    
       </Box>
@@ -107,4 +73,4 @@ const AddLinkReq = async() => {
   );
 };
 
-export default AddLink;
+export default AddCategory;

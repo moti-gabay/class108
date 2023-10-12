@@ -142,15 +142,15 @@ const Categories = () => {
       <Container sx={{padding:"20px",width:"85%"}}>
       {categories.map(({ name, _id }) => {
         return (
-<Accordion  style={{background:blue[300]}} key={_id}>
+<Accordion  style={{background:blue[300],textAlign:"center"}} key={_id}>
             <AccordionSummary
             
-              sx={{ margin: 2 }}
+              sx={{ margin: 2,textAlign:"center"}}
               expandIcon={<ExpandMoreIcon style={{color:"white"}}/>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography fontSize={20} color={"white"} fontWeight="fontWeightBold">{name}</Typography>
+              <Typography fontSize={20} color={"white"} sx={{}} fontWeight="fontWeightBold">{name}</Typography>
             </AccordionSummary>
             <AccordionDetails
               sx={{ display: "flex", flexWrap: "nowrap", overflowY: "auto" }}
