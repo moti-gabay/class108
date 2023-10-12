@@ -1,6 +1,8 @@
 import { Container, Input, Typography, alpha, styled } from "@mui/material";
 import CardLink from "./CardLink";
 import { lightBlue, teal,blue } from '@mui/material/colors';
+import Paper from '@mui/material/Paper';
+
 
 import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
@@ -13,6 +15,7 @@ import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
 import { Category, Link } from "../../types/types";
 import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -86,7 +89,6 @@ const Categories = () => {
   useEffect(() => {
     getCategoryReq();
     getLinksReq();
-    console.log(search);
   }, [search]);
   const onClick = () => {
     setSearch("");
@@ -94,10 +96,13 @@ const Categories = () => {
   };
   return (
     <div>
+      <Paper>
+        
+      </Paper>
       <Search
       sx={{background:blue[400],position:"relative" ,left:"70px" ,border:"1px solid white",borderRadius:"10px" }}
        onClick={() => setSearch("")}
-       style={{ width: "240px", marginRight: "" }}>
+       style={{ width: "230px", marginRight: "" }}>
         
         <SearchIconWrapper>
         {search !== '' && <ClearIcon style={{ fontSize:"20px",color:"white",background:"" ,borderRadius:"50%"}} />}  
@@ -118,24 +123,26 @@ const Categories = () => {
 <Typography style={{ textAlign:"center" }} variant="h5">
      תוצאות חיפוש:
    </Typography>{" "}
-      <Container 
-        sx={{background:blue[100],border:"1px solid black",borderRadius:"10px", display: "flex", flexWrap: "nowrap", overflow: "auto", padding:"10px",width:"80%" }}
-      >
-        
-        {search !== "" ? filterLinks.map((linked) => {
-            return (
-              <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
-                <CardLink
-                  name={linked.name}
-                  category={linked.category}
-                  url={linked.url}
-                  _id={linked._id}
-                />
-              </Grid>
-            );
-          
-        }):"אין תוצאות חיפוש..."}
-      </Container>
+   <Container
+       sx={{background:blue[100],border:"1px solid black",borderRadius:"10px", display: "flex", flexWrap: "nowrap", overflow: "auto", padding:"10px",width:"80%" }}
+    >
+       {search !== "" ? filterLinks.map((linked) => {
+           return (
+             <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
+               <CardLink
+                 name={linked.name}
+                 category={linked.category}
+                 url={linked.url}
+                 _id={linked._id}
+               />
+             </Grid>
+           );
+         
+       }):"אין תוצאות חיפוש..."}
+       
+      
+     </Container>
+    
     </div>
      }
       
@@ -143,14 +150,20 @@ const Categories = () => {
       {categories.map(({ name, _id }) => {
         return (
 <Accordion  style={{background:blue[300],textAlign:"center"}} key={_id}>
+          
             <AccordionSummary
             
               sx={{ margin: 2,textAlign:"center"}}
+              // expandIcon={<DeleteIcon style={{color:"red"}}/>}
               expandIcon={<ExpandMoreIcon style={{color:"white"}}/>}
+              // expandIcon={<DeleteIcon/>}
+              // startIcon={<DeleteIcon />
+              // Icon={<DeleteIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography fontSize={20} color={"white"} sx={{}} fontWeight="fontWeightBold">{name}</Typography>
+              
+              <Typography fontSize={30} color={"white"} sx={{}} fontWeight="fontWeightBold">{name}</Typography>
             </AccordionSummary>
             <AccordionDetails
               sx={{ display: "flex", flexWrap: "nowrap", overflowY: "auto" }}

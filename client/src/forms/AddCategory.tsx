@@ -14,32 +14,19 @@ import { ADD_CATEGORY_ROUTE } from '../constants/url';
 
 const AddCategory = () => {
 
-  const [formData, setFormData] = useState<Link>({
-    name: ""
+  
+  const [category, setCategory] = useState({
+    name:""
   });
-  const [categories, setCategory] = useState<Category[]>([
-    {
-      _id: "",
-      name: "",
-    },
-  ]);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name as string]: value,
-    }));
-  };
-
-  // const { AddLinkReq,link } = useContext(LinkContext);
-// const {category } = useContext(CategoryContext);
-
+  
 const nav = useNavigate()
 
 const AddCategoryReq = async() => {
- 
+    let cate = {
+        name:category
+    }
   try {
-    const {data} = await axios.post(ADD_CATEGORY_ROUTE,formData)
+    const {data} = await axios.post(ADD_CATEGORY_ROUTE,cate)
     console.log(data);
     nav(-1)
   } catch (error) {
@@ -56,8 +43,8 @@ const AddCategoryReq = async() => {
         label="category name"
         variant="outlined"
         fullWidth
-        value={formData.name}
-        onChange={handleChange}
+       
+        onChange={(e) => setCategory(e.target.value)}
         margin="normal"
       />
      

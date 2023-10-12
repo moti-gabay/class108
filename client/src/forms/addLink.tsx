@@ -61,7 +61,7 @@ const AddLinkReq = async() => {
 }
 
   return (
-    <FormControl sx={{ m: 1, width:"50%",text:"white",height:"800px" }} >
+    <FormControl sx={{ m: 1, width:"30%",text:"white",height:"800px" }} >
      <Card sx={{background:blue[200]}}>
      <Typography variant='h4' sx={{ textAlign:"center"}}>Add Link Form </Typography>
       <TextField
