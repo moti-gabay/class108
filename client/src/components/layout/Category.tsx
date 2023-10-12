@@ -1,9 +1,6 @@
 import { Container, Input, Typography, alpha, styled } from "@mui/material";
 import CardLink from "./CardLink";
-import { lightBlue, teal,blue } from '@mui/material/colors';
-import Paper from '@mui/material/Paper';
-
-
+import {  blue } from "@mui/material/colors";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -14,8 +11,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
 import { Category, Link } from "../../types/types";
 import Grid from "@mui/material/Grid";
-import SearchIcon from "@mui/icons-material/Search";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -90,25 +86,33 @@ const Categories = () => {
     getCategoryReq();
     getLinksReq();
   }, [search]);
-  const onClick = () => {
-    setSearch("");
-    console.log("reast");
-  };
   return (
     <div>
-      <Paper>
-        
-      </Paper>
       <Search
-      sx={{background:blue[400],position:"relative" ,left:"70px" ,border:"1px solid white",borderRadius:"10px" }}
-       onClick={() => setSearch("")}
-       style={{ width: "230px", marginRight: "" }}>
-        
+        sx={{
+          background: blue[400],
+          position: "relative",
+          left: "70px",
+          border: "1px solid white",
+          borderRadius: "10px",
+        }}
+        onClick={() => setSearch("")}
+        style={{ width: "230px", marginRight: "" }}
+      >
         <SearchIconWrapper>
-        {search !== '' && <ClearIcon style={{ fontSize:"20px",color:"white",background:"" ,borderRadius:"50%"}} />}  
+          {search !== "" && (
+            <ClearIcon
+              style={{
+                fontSize: "20px",
+                color: "white",
+                background: "",
+                borderRadius: "50%",
+              }}
+            />
+          )}
         </SearchIconWrapper>
         <Input
-        sx={{paddingX:"5px"}}
+          sx={{ paddingX: "5px" }}
           value={search}
           placeholder="  Search....  "
           // className="form-control"
@@ -118,59 +122,26 @@ const Categories = () => {
           }}
         />
       </Search>
-    {search !== "" &&
-    <div>
-<Typography style={{ textAlign:"center" }} variant="h5">
-     תוצאות חיפוש:
-   </Typography>{" "}
-   <Container
-       sx={{background:blue[100],border:"1px solid black",borderRadius:"10px", display: "flex", flexWrap: "nowrap", overflow: "auto", padding:"10px",width:"80%" }}
-    >
-       {search !== "" ? filterLinks.map((linked) => {
-           return (
-             <Grid key={linked._id} sx={{ flex: "0 0 auto", marginRight: 2 }}>
-               <CardLink
-                 name={linked.name}
-                 category={linked.category}
-                 url={linked.url}
-                 _id={linked._id}
-               />
-             </Grid>
-           );
-         
-       }):"אין תוצאות חיפוש..."}
-       
-      
-     </Container>
-    
-    </div>
-     }
-      
-      <Container sx={{padding:"20px",width:"85%"}}>
-      {categories.map(({ name, _id }) => {
-        return (
-<Accordion  style={{background:blue[300],textAlign:"center"}} key={_id}>
-          
-            <AccordionSummary
-            
-              sx={{ margin: 2,textAlign:"center"}}
-              // expandIcon={<DeleteIcon style={{color:"red"}}/>}
-              expandIcon={<ExpandMoreIcon style={{color:"white"}}/>}
-              // expandIcon={<DeleteIcon/>}
-              // startIcon={<DeleteIcon />
-              // Icon={<DeleteIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              
-              <Typography fontSize={30} color={"white"} sx={{}} fontWeight="fontWeightBold">{name}</Typography>
-            </AccordionSummary>
-            <AccordionDetails
-              sx={{ display: "flex", flexWrap: "nowrap", overflowY: "auto" }}
-            >
-              {links.map(
-                (linked) =>
-                  linked?.category === name && (
+      {search !== "" && (
+        <div>
+          <Typography style={{ textAlign: "center" }} variant="h5">
+            תוצאות חיפוש:
+          </Typography>{" "}
+          <Container
+            sx={{
+              background: blue[100],
+              border: "1px solid black",
+              borderRadius: "10px",
+              display: "flex",
+              flexWrap: "nowrap",
+              overflow: "auto",
+              padding: "10px",
+              width: "80%",
+            }}
+          >
+            {search !== ""
+              ? filterLinks.map((linked) => {
+                  return (
                     <Grid
                       key={linked._id}
                       sx={{ flex: "0 0 auto", marginRight: 2 }}
@@ -182,16 +153,59 @@ const Categories = () => {
                         _id={linked._id}
                       />
                     </Grid>
-                  )
-              )}
-            </AccordionDetails>
-          </Accordion>
-          
-          
-        );
-      })}
+                  );
+                })
+              : "אין תוצאות חיפוש..."}
+          </Container>
+        </div>
+      )}
+
+      <Container sx={{ padding: "20px", width: "85%" }}>
+        {categories.map(({ name, _id }) => {
+          return (
+            <Accordion
+              style={{ background: blue[300], textAlign: "center" }}
+              key={_id}
+            >
+              <AccordionSummary
+                sx={{ margin: 2, textAlign: "center" }}
+                expandIcon={<ExpandMoreIcon style={{ color: "white" }} />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography
+                  fontSize={30}
+                  color={"white"}
+                  sx={{}}
+                  fontWeight="fontWeightBold"
+                >
+                  {name}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{ display: "flex", flexWrap: "nowrap", overflowY: "auto" }}
+              >
+                {links.map(
+                  (linked) =>
+                    linked?.category === name && (
+                      <Grid
+                        key={linked._id}
+                        sx={{ flex: "0 0 auto", marginRight: 2 }}
+                      >
+                        <CardLink
+                          name={linked.name}
+                          category={linked.category}
+                          url={linked.url}
+                          _id={linked._id}
+                        />
+                      </Grid>
+                    )
+                )}
+              </AccordionDetails>
+            </Accordion>
+          );
+        })}
       </Container>
-   
     </div>
   );
 };
