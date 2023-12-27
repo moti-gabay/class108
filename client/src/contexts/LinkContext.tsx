@@ -38,7 +38,7 @@ export default function LinkProvider({ children }: LinkProviderProps) {
       name: "",
       url: "",
       category: "",
-      id: "",
+      _id: "",
     },
 
   );

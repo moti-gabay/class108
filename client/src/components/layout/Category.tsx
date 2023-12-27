@@ -125,7 +125,7 @@ const Categories = () => {
       {search !== "" && (
         <div>
           <Typography style={{ textAlign: "center" }} variant="h5">
-            תוצאות חיפוש:
+        Search Results:
           </Typography>{" "}
           <Container
             sx={{
@@ -136,7 +136,7 @@ const Categories = () => {
               flexWrap: "nowrap",
               overflow: "auto",
               padding: "10px",
-              width: "80%",
+             
             }}
           >
             {search !== ""

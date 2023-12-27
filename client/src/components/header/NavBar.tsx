@@ -48,6 +48,7 @@ export default function PrimarySearchAppBar() {
             
           >
              <img
+             onClick={()=>nav("/")}
             src={img}
             style={{ padding: "px", width: "50px", borderRadius: "50px" ,border:"1px solid white "}}
             alt=""

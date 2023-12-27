@@ -35,7 +35,7 @@ const AddCategoryReq = async() => {
 }
 
   return (
-    <FormControl sx={{width:"400px",height:"700px",padding:"60px" }} >
+    <FormControl sx={{width:"400px",height:"auto",padding:"60px" }} >
      <Card sx={{background:blue[200]}}>
      <Typography variant='h4' sx={{ textAlign:"center"}}>Add Category</Typography>
       <TextField
