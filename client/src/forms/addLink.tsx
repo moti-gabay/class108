@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, ReactNode } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Box, Card } from '@mui/joy';
 import {  useNavigate } from 'react-router-dom';
 import { Category, Link } from '../types/types';
-import { green,blue } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 
 const AddLink: React.FC = () => {
 
@@ -25,7 +25,14 @@ const AddLink: React.FC = () => {
       name: "",
     },
   ]);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name as string]: value,
+    }));
+  };
+  const handleChangeSelect = (event: React.SelectChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -70,7 +77,7 @@ const AddLinkReq = async() => {
         variant="outlined"
         fullWidth
         value={formData.name}
-        onChange={handleChange}
+        onChange={handleChangeInputs}
         margin="normal"
       />
       <TextField
@@ -79,14 +86,14 @@ const AddLinkReq = async() => {
         variant="outlined"
         fullWidth
         value={formData.url}
-        onChange={handleChange}
+        onChange={handleChangeInputs}
         margin="normal"
       />
       <FormControl fullWidth variant="outlined" margin="normal">
         <Select
           name="category"
           value={formData.category}
-          onChange={handleChange}
+          onChange={handleChangeSelect}
           label="category"
         >
 {categories?.map((cate)=> {
