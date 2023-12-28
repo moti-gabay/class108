@@ -1,4 +1,5 @@
-const jwt = require("joi");
+const jwt = require("jsonwebtoken");
+const { config } = require("../config/secret");
 
 
 exports.auth = (req,res,next) => {
@@ -24,7 +25,7 @@ exports.authAdmin = (req, res, next) => {
       return res.status(401).json({ err: "You need send token 111 aaaaa" });
     }
     try {
-      const decodeToken = jwt.verify(token, "picassoSecret");
+      const decodeToken = jwt.verify(token,"picassoSecret");
       if (decodeToken.role != "admin" && decodeToken.role != "superadmin") {
         return res
           .status(401)

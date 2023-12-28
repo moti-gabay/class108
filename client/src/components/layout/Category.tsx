@@ -4,7 +4,6 @@ import {  blue } from "@mui/material/colors";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -160,7 +159,7 @@ const Categories = () => {
         </div>
       )}
 
-      <Container sx={{ padding: "20px", width: "85%" }}>
+      <Container sx={{ padding: "20px", width: "85%",height:"auto" }}>
         {categories.map(({ name, _id }) => {
           return (
             <Accordion

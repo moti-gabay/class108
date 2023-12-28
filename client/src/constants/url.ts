@@ -14,3 +14,6 @@ export const CATEGORY_LIST_ROUTE = API_URL + "category/categoryList";
 export const ADD_CATEGORY_ROUTE = API_URL + "category/addCategory";
 export const DELETE_CATEGORY_ROUTE =API_URL + "category/"
 export const EDIT_CATEGORY_ROUTE = API_URL + "links/";
+
+export const LOGIN_REQ = API_URL + "users/login"
+export const CHECK_TOKEN_ADMIN = API_URL + "users/checkAdminToken"

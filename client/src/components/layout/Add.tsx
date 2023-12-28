@@ -1,25 +1,57 @@
-import { useState } from 'react'
-import AddLink from '../../forms/addLink';
-import AddCategory from '../../forms/AddCategory';
-import { Button } from '@mui/joy';
-
+import { useEffect, useState } from "react";
+import AddLink from "../../forms/addLink";
+import AddCategory from "../../forms/AddCategory";
+import { Button } from "@mui/joy";
+import AuthAdmin from "../../auth/AuthAdmin";
+import { TOKEN_KEY } from "../../constants/url";
 
 const Add = () => {
-    const [add,setAdd] = useState(true)
+  const [add, setAdd] = useState(true);
+  const [admin,setAdmin] = useState(false)
+  const authReq = async () => {
+    setAdmin(Boolean(localStorage.getItem(TOKEN_KEY)));
+  };
+  useEffect(() => {
+    authReq();
+  }, [localStorage.getItem(TOKEN_KEY)]);
   return (
-    <div style={{justifyContent:"center",height:"calc(100vh - 68.48px)"}}>
-        <div style={{width:"100%",height:"100px",display:"flex",justifyContent:"center",alignItems:"center"}}>
-        <Button sx={{width:"20%",fontSize:"20px"}} onClick={()=>setAdd(!add)} color='danger'>Add {add ? "category" : "link"}</Button>
-        </div>
-        <div style={{display:"flex",justifyContent:"center"}}>
-        {add &&
-        <AddLink/>}
-        {!add &&
-        <AddCategory/>}
-        </div>
-       
+    <div style={{ justifyContent: "center", height: "calc(100vh - 68.48px)" }}>
+   {/* {!admin &&   <AuthAdmin />} */}
+
+      <div
+        style={{
+          width: "100%",
+          height: "100px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button
+          sx={{ width: "10%", fontSize: "20px" }}
+          onClick={() => setAdd(!add)}
+          color="danger"
+        >
+          Add {add ? "category" : "link"}
+        </Button>
+      </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {add && <AddLink />}
+        {!add && <AddCategory />}
+      </div>
+      <Button
+        sx={{
+          width: "10%",
+          fontSize: "20px",
+          background: "grey",
+          margin: "10px 45vw",
+        }}
+        onClick={() => localStorage.removeItem(TOKEN_KEY)}
+      >
+        logout
+      </Button>
     </div>
-  )
-}
+  );
+};
 
 export default Add;

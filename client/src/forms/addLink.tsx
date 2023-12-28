@@ -1,4 +1,4 @@
-import React, { useState,useEffect, ReactNode } from 'react';
+import React, { useState,useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -47,7 +47,6 @@ const getCategoryReq = async () => {
   const { data } = await axios.get(
     "http://localhost:3003/category/categoryList"
   );
-  console.log(data);
   setCategory(data)
 };
 
