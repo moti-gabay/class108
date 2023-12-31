@@ -15,3 +15,15 @@ export type User = {
   id: number;
   role?: string;
 };
+
+export interface ApiRequestParams {
+  url: string;
+  method: string;
+  bodyData?: object;
+}
+
+// Define the type for the response
+export interface ApiResponse<T = any> {
+  data: T;
+  // Add other properties as needed
+}

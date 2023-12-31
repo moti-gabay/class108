@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const  {LinksModel,validLinks} = require("../models/linksModel")
+const  {LinksModel,validLinks} = require("../models/linksModel");
+const { authAdmin } = require("../middlewares/auth");
 
 
 router.get("/linkInfo/:id", async(req,res) => {
@@ -25,7 +26,7 @@ router.get("/linkInfo/:id", async(req,res) => {
     }
   })
 
-  router.post("/addLink",async(req,res) => {
+  router.post("/addLink",authAdmin,async(req,res) => {
     const validBody = validLinks(req.body)
     if(validBody.error){
       return res.status(400).json(validBody.error.details)
@@ -40,7 +41,7 @@ router.get("/linkInfo/:id", async(req,res) => {
     }
   })
 
-  router.put("/:id",async(req,res) => {
+  router.put("/:id",authAdmin,async(req,res) => {
     const {id} = req.params;
     const validBody = validLinks(req.body);
     if(validBody.error){
@@ -56,7 +57,7 @@ router.get("/linkInfo/:id", async(req,res) => {
     }
   })
 
-  router.delete("/:id", async (req, res) => {
+  router.delete("/:id",authAdmin, async (req, res) => {
     const { id } = req.params;
     try {
       const data = await LinksModel.deleteOne({ _id: id });

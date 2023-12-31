@@ -11,6 +11,7 @@ import axios from "axios";
 import { Link } from "../../types/types";
 import {  DELETE_LINK_ROUTE, TOKEN_KEY } from "../../constants/url";
 import { blue } from "@mui/material/colors";
+import AuthAdmin from "../../auth/AuthAdmin";
 
 export default function CardLink(props: Link) {
   const [admin, setAdmin] = useState(false);
@@ -25,7 +26,7 @@ export default function CardLink(props: Link) {
     }
   };
   const authReq = async () => {
-    setAdmin(Boolean( localStorage.getItem(TOKEN_KEY)))
+    setAdmin(Boolean(localStorage.getItem(TOKEN_KEY)))
   };
   const nav = useNavigate();
 
@@ -46,7 +47,7 @@ export default function CardLink(props: Link) {
         <CardActions
           style={{ display: "flex", justifyContent: "space-evenly" }}
         >
-          {admin && (
+          {admin && <AuthAdmin/> && (
             <div>
               <Button
                 size="small"

@@ -12,12 +12,13 @@ import {
   CATEGORY_LIST_ROUTE,
   EDIT_LINK_ROUTE,
   LINK_INFO_ROUTE,
+  TOKEN_KEY,
 } from "../constants/url";
 import { Category, Link } from "../types/types";
-import { green,blue } from '@mui/material/colors';
+import { blue } from "@mui/material/colors";
 
 const EditLink: React.FC = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
 
   const [formData, setFormData] = useState<Link>({
     name: "",
@@ -60,12 +61,14 @@ const EditLink: React.FC = () => {
   };
 
   const EditLinkReq = async () => {
-delete formData._id;
+    delete formData._id;
     try {
-      const { data } = await axios.put(
-        EDIT_LINK_ROUTE + id,
-        formData
-      );
+      const { data } = await axios.put(EDIT_LINK_ROUTE + id, formData, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": localStorage.getItem(TOKEN_KEY) || "",
+        },
+      });
       console.log(data);
       nav(-1);
     } catch (error) {
@@ -77,51 +80,58 @@ delete formData._id;
   }, []);
 
   return (
-    <FormControl sx={{ m: 1, width: 300, marginX:"35%",height:"700px",padding:"60px" }} >
-           <Card sx={{background:blue[200]}}>
-           <Typography variant="h4" sx={{ textAlign:"center",padding:2 }}>
-        Edit Link Form{" "}
-      </Typography>
-      <TextField
-        name="name"
-        label="name"
-        variant="outlined"
-        fullWidth
-        value={formData.name}
-        onChange={handleChange}
-        margin="normal"
-      />
-      <TextField
-        name="url"
-        label="url"
-        variant="outlined"
-        fullWidth
-        value={formData.url}
-        onChange={handleChange}
-        margin="normal"
-      />
-      <FormControl  fullWidth variant="outlined" margin="normal">
-        <Select
-          name="category"
-          value={formData.category}
+    <FormControl
+      sx={{
+        m: 1,
+        width: 300,
+        marginX: "35%",
+        height: "700px",
+        padding: "60px",
+      }}
+    >
+      <Card sx={{ background: blue[200] }}>
+        <Typography variant="h4" sx={{ textAlign: "center", padding: 2 }}>
+          Edit Link Form{" "}
+        </Typography>
+        <TextField
+          name="name"
+          label="name"
+          variant="outlined"
+          fullWidth
+          value={formData.name}
           onChange={handleChange}
-          label="category"
-        >
-          {categories?.map((cate) => {
-            return <MenuItem value={cate.name}>{cate.name}</MenuItem>;
-          })}
-        </Select>
-      </FormControl>
-      <Box display={"flex"} justifyContent={"space-evenly"}>
-        <Button onClick={EditLinkReq} variant="contained" color="success">
-          ערוך
-        </Button>
-        <Button onClick={() => nav(-1)} variant="contained" color="primary">
-          חזור
-        </Button>
-      </Box>
-</Card>
-   
+          margin="normal"
+        />
+        <TextField
+          name="url"
+          label="url"
+          variant="outlined"
+          fullWidth
+          value={formData.url}
+          onChange={handleChange}
+          margin="normal"
+        />
+        <FormControl fullWidth variant="outlined" margin="normal">
+          <Select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            label="category"
+          >
+            {categories?.map((cate) => {
+              return <MenuItem value={cate.name}>{cate.name}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+        <Box display={"flex"} justifyContent={"space-evenly"}>
+          <Button onClick={EditLinkReq} variant="contained" color="success">
+            EDIT
+          </Button>
+          <Button onClick={() => nav(-1)} variant="contained" color="primary">
+            BACK
+          </Button>
+        </Box>
+      </Card>
     </FormControl>
   );
 };

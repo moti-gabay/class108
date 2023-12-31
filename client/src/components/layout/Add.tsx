@@ -4,10 +4,13 @@ import AddCategory from "../../forms/AddCategory";
 import { Button } from "@mui/joy";
 import AuthAdmin from "../../auth/AuthAdmin";
 import { TOKEN_KEY } from "../../constants/url";
+import { useNavigate } from "react-router-dom";
 
 const Add = () => {
+  const nav = useNavigate();
+
   const [add, setAdd] = useState(true);
-  const [admin,setAdmin] = useState(false)
+  const [admin, setAdmin] = useState(false);
   const authReq = async () => {
     setAdmin(Boolean(localStorage.getItem(TOKEN_KEY)));
   };
@@ -16,8 +19,7 @@ const Add = () => {
   }, [localStorage.getItem(TOKEN_KEY)]);
   return (
     <div style={{ justifyContent: "center", height: "calc(100vh - 68.48px)" }}>
-   {/* {!admin &&   <AuthAdmin />} */}
-
+        <AuthAdmin />
       <div
         style={{
           width: "100%",
@@ -46,7 +48,10 @@ const Add = () => {
           background: "grey",
           margin: "10px 45vw",
         }}
-        onClick={() => localStorage.removeItem(TOKEN_KEY)}
+        onClick={() => {
+          localStorage.removeItem(TOKEN_KEY);
+          nav(-1)
+        }}
       >
         logout
       </Button>

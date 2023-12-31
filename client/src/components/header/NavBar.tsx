@@ -19,6 +19,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../../types/types";
 import { LOGIN_REQ, TOKEN_KEY } from "../../constants/url";
 import axios from "axios";
+import  Module  from "../../module/module";
 
 export default function PrimarySearchAppBar() {
   const [user, setUser] = useState(true);
@@ -29,16 +30,18 @@ export default function PrimarySearchAppBar() {
     handleSubmit,
     formState: { errors },
   } = useForm<User>();
+ 
+
   const getToken = () => { 
     setUser(!Boolean(localStorage.getItem(TOKEN_KEY)));
   };
+
   const loginReq = async (user: User) => {
     try {
       const { data } = await axios.post(LOGIN_REQ, user);
 
       if (data.token.role === "admin") {
-        console.log(data.token.token);
-        localStorage.setItem("token",data.token.token);
+        localStorage.setItem(TOKEN_KEY,data.token.token);
         setUser(false);
       }
     } catch (error) {
@@ -47,8 +50,6 @@ export default function PrimarySearchAppBar() {
   };
 
   const onSubmit: SubmitHandler<User> = (data: User) => {
-
-
     loginReq(data);
     reset();
   };
@@ -75,7 +76,7 @@ export default function PrimarySearchAppBar() {
 
   useEffect(()=>{
     getToken()
-  },[user])
+  },[localStorage.getItem(TOKEN_KEY)])
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -95,6 +96,7 @@ export default function PrimarySearchAppBar() {
           </IconButton>
 
           <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
+        
 
           {user ? (
             <Dropdown>

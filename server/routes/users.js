@@ -40,7 +40,7 @@ router.get("/usersList", authAdmin, async (req, res) => {
 router.get("/checkAdminToken", authAdmin, (req, res) => {
   res.json({ status: true });
 });
-router.post("/", async (req, res) => {
+router.post("/" ,async (req, res) => {
   const validBody = validUsers(req.body);
   if (validBody.error) {
     return res.status(400).json(validBody.error.details);
@@ -88,7 +88,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authAdmin,async (req, res) => {
   try {
     const { id } = req.params;
 
