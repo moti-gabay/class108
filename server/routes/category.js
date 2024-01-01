@@ -23,7 +23,7 @@ router.post("/addCategory",authAdmin ,async (req, res) => {
     return res.status(400).json(validBody.error.details);
   }
   try {
-    const category = new categoryModel(req.body);
+    const category = await categoryModel.create(req.body);
     res.status(201).json(category);
   } catch (err) {
     console.log(err);

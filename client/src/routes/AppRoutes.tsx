@@ -51,7 +51,7 @@ const AppRoutes = () => {
   return (
     <CategoryProvider>
       <LinkProvider>
-      <div style={{background:blue[100]}}>
+      <div  style={{background:blue[100],height:"100vh",overflow:"auto"}}>
         <RouterProvider router={router} />
     </div>
       </LinkProvider>

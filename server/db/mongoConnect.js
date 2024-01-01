@@ -5,5 +5,5 @@ main().catch(err => console.log(err));
 
 async function main() {
   await mongoose.connect(config.MONGO_CONNECT);
-  console.log(`mongo connect 108links  `);
+  console.log(`mongo connect 108links`);
 }

@@ -18,7 +18,9 @@ export default function CardLink(props: Link) {
   const deleteLink = async () => {
     try {
       if (window.confirm("do you want to delete this link ?")) {
-        const { data } = await axios.delete(DELETE_LINK_ROUTE + props._id);
+        const { data } = await axios.delete(DELETE_LINK_ROUTE + props._id,{headers:{
+          'x-api-key':localStorage[TOKEN_KEY]
+        }});
         console.log(data);
       }
     } catch (error) {

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -19,65 +20,42 @@ import { blue } from "@mui/material/colors";
 
 const EditLink: React.FC = () => {
   const { id } = useParams();
-
-  const [formData, setFormData] = useState<Link>({
-    name: "",
-    url: "",
-    category: "",
-    _id: "",
-  });
-  const [categories, setCategory] = useState<Category[]>([
-    {
-      _id: "",
-      name: "",
-    },
-  ]);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name as string]: value,
-    }));
-  };
-
   const nav = useNavigate();
 
-  const getCategoryReq = async () => {
-    const { data } = await axios.get(CATEGORY_LIST_ROUTE);
-    setCategory(data);
-  };
-
-  useEffect(() => {
-    getCategoryReq();
-  }, []);
+  const { register, handleSubmit, setValue } = useForm<Link>();
+  const [categories, setCategories] = React.useState<Category[]>([]);
 
   const getLinkInfo = async () => {
     try {
       const { data } = await axios.get(LINK_INFO_ROUTE + id);
-      setFormData(data);
+      setValue("name", data.name);
+      setValue("url", data.url);
+      setValue("category", data.category);
     } catch (error) {
       console.log(error);
     }
   };
-
-  const EditLinkReq = async () => {
-    delete formData._id;
-    try {
-      const { data } = await axios.put(EDIT_LINK_ROUTE + id, formData, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": localStorage.getItem(TOKEN_KEY) || "",
-        },
-      });
-      console.log(data);
-      nav(-1);
-    } catch (error) {
-      console.log(error);
-    }
+  const getCategoryReq = async () => {
+    const { data } = await axios.get(CATEGORY_LIST_ROUTE);
+    setCategories(data);
   };
   useEffect(() => {
+    getCategoryReq();
     getLinkInfo();
   }, []);
+
+  const onSubmit = async (data: Link) => {
+    try {
+      delete data._id;
+      await axios.put(EDIT_LINK_ROUTE + id, data, {
+        headers: {
+          "x-api-key": localStorage[TOKEN_KEY],
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <FormControl
@@ -93,44 +71,39 @@ const EditLink: React.FC = () => {
         <Typography variant="h4" sx={{ textAlign: "center", padding: 2 }}>
           Edit Link Form{" "}
         </Typography>
-        <TextField
-          name="name"
-          label="name"
-          variant="outlined"
-          fullWidth
-          value={formData.name}
-          onChange={handleChange}
-          margin="normal"
-        />
-        <TextField
-          name="url"
-          label="url"
-          variant="outlined"
-          fullWidth
-          value={formData.url}
-          onChange={handleChange}
-          margin="normal"
-        />
-        <FormControl fullWidth variant="outlined" margin="normal">
-          <Select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            label="category"
-          >
-            {categories?.map((cate) => {
-              return <MenuItem value={cate.name}>{cate.name}</MenuItem>;
-            })}
-          </Select>
-        </FormControl>
-        <Box display={"flex"} justifyContent={"space-evenly"}>
-          <Button onClick={EditLinkReq} variant="contained" color="success">
-            EDIT
-          </Button>
-          <Button onClick={() => nav(-1)} variant="contained" color="primary">
-            BACK
-          </Button>
-        </Box>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            {...register("name")}
+            label="name"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            {...register("url")}
+            label="url"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+          />
+          <FormControl fullWidth variant="outlined" margin="normal">
+            <Select {...register("category")} label="category">
+              {categories?.map((cate) => (
+                <MenuItem key={cate._id} value={cate.name}>
+                  {cate.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box display={"flex"} justifyContent={"space-evenly"}>
+            <Button type="submit" variant="contained" color="success">
+              EDIT
+            </Button>
+            <Button onClick={() => nav(-1)} variant="contained" color="primary">
+              BACK
+            </Button>
+          </Box>
+        </form>
       </Card>
     </FormControl>
   );
