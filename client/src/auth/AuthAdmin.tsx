@@ -14,7 +14,9 @@ const AuthAdmin = () => {
               'Content-Type': 'application/json',
               'x-api-key': localStorage.getItem(TOKEN_KEY) || '',
             },
-          });          
+          });  
+          console.log(data);
+                  
         } catch (error) {  
           nav('*');
         }

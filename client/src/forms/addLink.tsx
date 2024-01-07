@@ -22,7 +22,7 @@ const AddLink: React.FC = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<Link>();
   const nav = useNavigate();
 

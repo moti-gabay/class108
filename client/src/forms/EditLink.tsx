@@ -45,9 +45,10 @@ const EditLink: React.FC = () => {
   }, []);
 
   const onSubmit = async (data: Link) => {
+    const dataCopy = { ...data } as Partial<Link>;
+    delete dataCopy._id;
     try {
-      delete data._id;
-      await axios.put(EDIT_LINK_ROUTE + id, data, {
+      await axios.put(EDIT_LINK_ROUTE + id, dataCopy, {
         headers: {
           "x-api-key": localStorage[TOKEN_KEY],
         },
@@ -55,8 +56,7 @@ const EditLink: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
+ };
   return (
     <FormControl
       sx={{

@@ -19,7 +19,7 @@ const Add = () => {
   }, [localStorage.getItem(TOKEN_KEY)]);
   return (
     <div style={{ justifyContent: "center", height: "calc(100vh - 68.48px)" }}>
-        <AuthAdmin />
+     {!admin &&   <AuthAdmin />}
       <div
         style={{
           width: "100%",

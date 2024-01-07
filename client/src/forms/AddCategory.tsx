@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -11,11 +10,10 @@ import { blue } from "@mui/material/colors";
 import { ADD_CATEGORY_ROUTE, TOKEN_KEY } from "../constants/url";
 
 const AddCategory = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit,reset } = useForm();
   const nav = useNavigate();
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const onSubmit = async ( data : any) => {
 
     try {
       const { data: responseData } = await axios.post(
@@ -27,9 +25,9 @@ const AddCategory = () => {
           },
         }
       );
-
       console.log(responseData);
-      // Handle success, if needed
+      
+      reset()      // Handle success, if needed
     } catch (error) {
       console.log(error);
       // Handle error, if needed

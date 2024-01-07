@@ -19,7 +19,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../../types/types";
 import { LOGIN_REQ, TOKEN_KEY } from "../../constants/url";
 import axios from "axios";
-import  Module  from "../../module/module";
 
 export default function PrimarySearchAppBar() {
   const [user, setUser] = useState(true);

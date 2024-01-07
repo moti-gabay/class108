@@ -4,7 +4,7 @@ import {  useEffect, useState } from "react";
 import axios from "axios";
 import { LINK_INFO_ROUTE } from "../constants/url";
 import { Link } from "../types/types";
-import { green,blue } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 
 const LinkInfo = () => {
  
@@ -14,7 +14,7 @@ const LinkInfo = () => {
       category: "",
       name: "",
       url: "",
-      id: "",
+      _id: ""
     },
   );
   const { id } = useParams();
