@@ -1,4 +1,3 @@
-import Footer from '../Footer';
 import PrimarySearchAppBar from '../header/NavBar';
 import { Outlet } from "react-router-dom";
 

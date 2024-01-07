@@ -4,15 +4,13 @@ import {  blue } from "@mui/material/colors";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE } from "../../constants/url";
+import { CATEGORY_LIST_ROUTE, LINK_LIST_ROUTE, TOKEN_KEY } from "../../constants/url";
 import { Category, Link } from "../../types/types";
 import Grid from "@mui/material/Grid";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -85,7 +83,7 @@ const Categories = () => {
   useEffect(() => {
     getCategoryReq();
     getLinksReq();
-  }, [search]);
+  }, [search,localStorage.getItem(TOKEN_KEY)]);
   return (
     <div>
       <Search
@@ -115,7 +113,6 @@ const Categories = () => {
           sx={{ paddingX: "5px" }}
           value={search}
           placeholder="  Search....  "
-          // className="form-control"
           onInput={input}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -160,7 +157,7 @@ const Categories = () => {
         </div>
       )}
 
-      <Container sx={{ padding: "20px", width: "85%" }}>
+      <Container sx={{ padding: "20px", width: "85%",height:"auto" }}>
         {categories.map(({ name, _id }) => {
           return (
             <Accordion
@@ -176,7 +173,6 @@ const Categories = () => {
                 <Typography
                   fontSize={30}
                   color={"white"}
-                  sx={{}}
                   fontWeight="fontWeightBold"
                 >
                   { name}

@@ -1,4 +1,5 @@
-const jwt = require("joi");
+const jwt = require("jsonwebtoken");
+const { config } = require("../config/secret");
 
 
 exports.auth = (req,res,next) => {
@@ -18,21 +19,36 @@ exports.auth = (req,res,next) => {
 
 
 }
-exports.authAdmin = (req, res, next) => {
-    const token = req.header("x-api-key");
-    if (!token) {
-      return res.status(401).json({ err: "You need send token 111 aaaaa" });
-    }
-    try {
-      const decodeToken = jwt.verify(token, "picassoSecret");
-      if (decodeToken.role != "admin" && decodeToken.role != "superadmin") {
-        return res
-          .status(401)
-          .json({ err: "you must be admin in this endpoint" });
+
+// exports.authAdmin = (req, res, next) => {
+//   if(req.tokenData){
+//     console.log(req.tokenData);
+//   }
+//   try {
+//     if (req.tokenData.role !== "admin") {
+//       return res.status(401).json({ msg_err: "You must be admin in this endpoint" });
+//     }
+//     next();
+//   } catch (err) {
+//     console.log(err);
+//     res.status(502).json({ err });
+//   }
+// }
+ exports.authAdmin = (req, res, next) => {
+  const token = req.header("x-api-key");
+
+  if (!token) {
+      return res.status(401).json({ msg: "No Token Provided" });
+  }
+  try {
+      const decodedToken = jwt.verify(token, "picassoSecret");
+      if (decodedToken.role !== "admin") {
+          return res.status(403).json({ msg: "Access Denied" });
       }
-      req.tokenData = decodeToken;
+      req.tokenData = decodedToken;
       next();
-    } catch (err) {
-      res.status(401).json({ err: "token invalid or expired 2222 bbbbb" });
-    }
-  };
+  } catch (err) {
+      console.log(err);
+      res.status(502).json({ err: "Token invalid or expired" });
+  }
+};
