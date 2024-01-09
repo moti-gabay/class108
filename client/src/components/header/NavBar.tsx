@@ -29,9 +29,8 @@ export default function PrimarySearchAppBar() {
     handleSubmit,
     formState: { errors },
   } = useForm<User>();
- 
 
-  const getToken = () => { 
+  const getToken = () => {
     setUser(!Boolean(localStorage.getItem(TOKEN_KEY)));
   };
 
@@ -40,7 +39,7 @@ export default function PrimarySearchAppBar() {
       const { data } = await axios.post(LOGIN_REQ, user);
 
       if (data.token.role === "admin") {
-        localStorage.setItem(TOKEN_KEY,data.token.token);
+        localStorage.setItem(TOKEN_KEY, data.token.token);
         setUser(false);
       }
     } catch (error) {
@@ -73,29 +72,25 @@ export default function PrimarySearchAppBar() {
 
   // const { inputValue, setInputValue, clearInput } = useContext(InputContext);
 
-  useEffect(()=>{
-    getToken()
-  },[localStorage.getItem(TOKEN_KEY)])
+  useEffect(() => {
+    getToken();
+  }, [localStorage.getItem(TOKEN_KEY)]);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" aria-label="open drawer" sx={{}}>
-            <img
-              onClick={() => nav("/")}
-              src={img}
-              style={{
-                padding: "px",
-                width: "50px",
-                borderRadius: "50px",
-                border: "1px solid white ",
-              }}
-              alt=""
-            />
-          </IconButton>
-
+          <img
+            onClick={() => nav("/")}
+            src={img}
+            style={{
+              padding: "px",
+              width: "50px",
+              borderRadius: "50px",
+              border: "1px solid white ",
+            }}
+            alt=""
+          />
           <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
-        
 
           {user ? (
             <Dropdown>
