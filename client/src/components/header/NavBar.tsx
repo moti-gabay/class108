@@ -20,7 +20,8 @@ import { LOGIN_REQ, TOKEN_KEY } from "../../constants/url";
 import axios from "axios";
 
 export default function PrimarySearchAppBar() {
-  const [user, setUser] = useState(true);
+  const [isGust, setIsGust] = useState(false);
+  const nav = useNavigate();
 
   const {
     reset,
@@ -30,7 +31,7 @@ export default function PrimarySearchAppBar() {
   } = useForm<User>();
 
   const getToken = () => {
-    setUser(!Boolean(localStorage.getItem(TOKEN_KEY)));
+    setIsGust(!Boolean(localStorage.getItem(TOKEN_KEY)));
   };
 
   const loginReq = async (user: User) => {
@@ -39,7 +40,7 @@ export default function PrimarySearchAppBar() {
 
       if (data.token.role === "admin") {
         localStorage.setItem(TOKEN_KEY, data.token.token);
-        setUser(false);
+        setIsGust(false);
       }
     } catch (error) {
       console.log(error);
@@ -67,7 +68,6 @@ export default function PrimarySearchAppBar() {
     </svg>,
     "Plus"
   );
-  const nav = useNavigate();
 
   // const { inputValue, setInputValue, clearInput } = useContext(InputContext);
 
@@ -91,7 +91,7 @@ export default function PrimarySearchAppBar() {
           />
           <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
 
-          {user ? (
+          {isGust ? (
             <Dropdown>
               <MenuButton sx={{ background: blue[400], borderRadius: "10%" }}>
                 <Icon style={{ display: "flex", justifyContent: "center" }}>
@@ -113,7 +113,9 @@ export default function PrimarySearchAppBar() {
                   onSubmit={handleSubmit(onSubmit)}
                   style={{ padding: "20px", display: "" }}
                 >
+                  <label htmlFor="name">name</label>
                   <Input
+                  id="name"
                     {...register("name", {
                       required: { value: true, message: "Name required" },
                       minLength: { value: 2, message: "min 2 chars" },
@@ -125,15 +127,17 @@ export default function PrimarySearchAppBar() {
                       borderRadius: "10px",
                       border: "1px solid black",
                     }}
-                    placeholder="name..."
+                    placeholder="name"
                   />
                   {errors.name && (
                     <p className="m-0 text-sm text-red-600">
                       {errors.name.message}
                     </p>
                   )}
+                  <label htmlFor="password">password</label>
 
                   <Input
+                  id="password"
                     {...register("password", {
                       required: { value: true, message: "password required" },
                       minLength: { value: 2, message: "min 2 chars" },

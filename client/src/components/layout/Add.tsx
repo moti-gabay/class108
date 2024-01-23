@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Add = () => {
   const nav = useNavigate();
 
-  const [add, setAdd] = useState(true);
+  const [add, setAdd] = useState(false);
   const [admin, setAdmin] = useState(false);
   const authReq = async () => {
     setAdmin(Boolean(localStorage.getItem(TOKEN_KEY)));

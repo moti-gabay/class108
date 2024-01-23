@@ -39,7 +39,7 @@ export default function CardLink(props: Link) {
     <Button>
       <Card sx={{ width: 250, margin: 1, background: blue[200] }}>
         <CardContent>
-          <Typography sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
+          <Typography  sx={{ fontSize: 24, textAlign: "center" }} gutterBottom>
             name :<span>{props.name}</span>
           </Typography>
           <Typography sx={{ fontSize: 20, textAlign: "center" }} gutterBottom>
@@ -52,13 +52,14 @@ export default function CardLink(props: Link) {
           {admin && <AuthAdmin/> && (
             <div>
               <Button
+
                 size="small"
                 sx={{ margin: 1 }}
                 onClick={deleteLink}
                 variant="contained"
                 color="error"
                 endIcon={<DeleteIcon style={{ paddingRight: 10 }} />}
-              ></Button>
+              >deleteButton</Button>
               <Button
                 size="small"
                 sx={{ margin: 1 }}
