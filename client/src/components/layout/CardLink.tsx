@@ -28,13 +28,17 @@ export default function CardLink(props: Link) {
     }
   };
   const authReq = async () => {
-    setAdmin(Boolean(localStorage.getItem(TOKEN_KEY)))
+    if(localStorage.getItem(TOKEN_KEY)){
+      setAdmin(true)
+    }else{
+      setAdmin(false)
+    }
   };
   const nav = useNavigate();
 
   useEffect(() => {
     authReq();
-  }, [admin,localStorage.getItem(TOKEN_KEY)]);
+  }, [localStorage.getItem(TOKEN_KEY)]);
   return (
     <Button>
       <Card sx={{ width: 250, margin: 1, background: blue[200] }}>
@@ -59,7 +63,7 @@ export default function CardLink(props: Link) {
                 variant="contained"
                 color="error"
                 endIcon={<DeleteIcon style={{ paddingRight: 10 }} />}
-              >deleteButton</Button>
+              ></Button>
               <Button
                 size="small"
                 sx={{ margin: 1 }}

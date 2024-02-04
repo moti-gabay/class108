@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import AddLink from "../../forms/addLink";
 import AddCategory from "../../forms/AddCategory";
 import { Button } from "@mui/joy";
@@ -10,16 +10,11 @@ const Add = () => {
   const nav = useNavigate();
 
   const [add, setAdd] = useState(false);
-  const [admin, setAdmin] = useState(false);
-  const authReq = async () => {
-    setAdmin(Boolean(localStorage.getItem(TOKEN_KEY)));
-  };
-  useEffect(() => {
-    authReq();
-  }, [localStorage.getItem(TOKEN_KEY)]);
+  
+ 
   return (
     <div style={{ justifyContent: "center", height: "calc(100vh - 68.48px)" }}>
-     {!admin &&   <AuthAdmin />}
+      <AuthAdmin />
       <div
         style={{
           width: "100%",

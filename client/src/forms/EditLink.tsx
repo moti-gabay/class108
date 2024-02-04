@@ -35,6 +35,7 @@ const EditLink: React.FC = () => {
       console.log(error);
     }
   };
+
   const getCategoryReq = async () => {
     const { data } = await axios.get(CATEGORY_LIST_ROUTE);
     setCategories(data);
@@ -56,7 +57,7 @@ const EditLink: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
- };
+  };
   return (
     <FormControl
       sx={{
@@ -72,14 +73,21 @@ const EditLink: React.FC = () => {
           Edit Link Form{" "}
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="name">name</label>
           <TextField
+            id="name"
+            inputProps={{ "data-testid": "name" }}
             {...register("name")}
             label="name"
             variant="outlined"
             fullWidth
             margin="normal"
           />
+          <label htmlFor="url">url</label>
+
           <TextField
+                      inputProps={{ "data-testid": "url" }}
+
             {...register("url")}
             label="url"
             variant="outlined"
@@ -88,7 +96,7 @@ const EditLink: React.FC = () => {
           />
           <FormControl fullWidth variant="outlined" margin="normal">
             <Select {...register("category")} label="category">
-              {categories?.map((cate) => (
+              {categories.map((cate) => (
                 <MenuItem key={cate._id} value={cate.name}>
                   {cate.name}
                 </MenuItem>

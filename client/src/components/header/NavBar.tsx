@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Icon from "@mui/material/Icon";
 import { createSvgIcon } from "@mui/material/utils";
 import { useNavigate } from "react-router-dom";
-import img from "../../assets/108img.jpeg";
+import img from "../../assets/linksimg.png";
 import userImg from "../../assets/icons8-user-32.png";
 import { blue } from "@mui/material/colors";
 import { Input } from "@mui/material";
@@ -31,7 +31,11 @@ export default function PrimarySearchAppBar() {
   } = useForm<User>();
 
   const getToken = () => {
-    setIsGust(!Boolean(localStorage.getItem(TOKEN_KEY)));
+    if(localStorage.getItem(TOKEN_KEY)){
+      setIsGust(false);
+    }else{
+      setIsGust(true)
+    }
   };
 
   const loginReq = async (user: User) => {
@@ -91,7 +95,7 @@ export default function PrimarySearchAppBar() {
           />
           <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
 
-          {isGust ? (
+          {isGust && 
             <Dropdown>
               <MenuButton sx={{ background: blue[400], borderRadius: "10%" }}>
                 <Icon style={{ display: "flex", justifyContent: "center" }}>
@@ -113,7 +117,7 @@ export default function PrimarySearchAppBar() {
                   onSubmit={handleSubmit(onSubmit)}
                   style={{ padding: "20px", display: "" }}
                 >
-                  <label htmlFor="name">name</label>
+                
                   <Input
                   id="name"
                     {...register("name", {
@@ -134,7 +138,7 @@ export default function PrimarySearchAppBar() {
                       {errors.name.message}
                     </p>
                   )}
-                  <label htmlFor="password">password</label>
+                 
 
                   <Input
                   id="password"
@@ -168,8 +172,8 @@ export default function PrimarySearchAppBar() {
                 </form>
               </Menu>
             </Dropdown>
-          ) : (
-            <Button
+          }
+      {  !isGust &&    <Button
               sx={{ background: blue[400] }}
               onClick={() => nav("/addLink")}
               variant="contained"
@@ -177,8 +181,8 @@ export default function PrimarySearchAppBar() {
               <Icon style={{ display: "flex", justifyContent: "center" }}>
                 <PlusIcon fontSize="small" style={{}} />
               </Icon>
-            </Button>
-          )}
+            </Button>}
+          
         </Toolbar>
       </AppBar>
     </Box>

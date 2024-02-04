@@ -10,7 +10,7 @@ import { blue } from "@mui/material/colors";
 import { ADD_CATEGORY_ROUTE, TOKEN_KEY } from "../constants/url";
 
 const AddCategory = () => {
-  const { register, handleSubmit,reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const nav = useNavigate();
 
   const onSubmit = async ( data : any) => {
@@ -27,7 +27,7 @@ const AddCategory = () => {
       );
       console.log(responseData);
       
-      reset()      // Handle success, if needed
+      // reset()      // Handle success, if needed
     } catch (error) {
       console.log(error);
       // Handle error, if needed
@@ -36,7 +36,7 @@ const AddCategory = () => {
 
   return (
     <FormControl
-      sx={{ width: "400px", height: "calc(100vh)", padding: "60px" }}
+      sx={{ width: "400px", height: "auto", padding: "60px" }}
     >
       <Card sx={{ background: blue[200] }}>
         <Typography variant="h4" sx={{ textAlign: "center" }}>

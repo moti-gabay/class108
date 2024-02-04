@@ -27,17 +27,15 @@ const AddLink: React.FC = () => {
   const nav = useNavigate();
 
   const [categories, setCategories] = React.useState<Category[]>([]);
-
+  const getCategoryReq = async () => {
+    try {
+      const { data } = await axios.get(CATEGORY_LIST_ROUTE);
+      setCategories(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   React.useEffect(() => {
-    const getCategoryReq = async () => {
-      try {
-        const { data } = await axios.get(CATEGORY_LIST_ROUTE);
-        setCategories(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     getCategoryReq();
   }, []);
 
@@ -61,17 +59,24 @@ const AddLink: React.FC = () => {
     <FormControl sx={{ m: 1, width: "30%", text: "white", height: "auto" }}>
       <Card sx={{ background: blue[200] }}>
         <Typography variant="h4" sx={{ textAlign: "center" }}>
-          Add Link Form{" "}
+          Add Link Form
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
+          // data-testid="name"
+          placeholder="name"
+             inputProps={{ "data-testid": "name" }}
             {...register("name", { required: true })}
             label="Name"
             variant="outlined"
             fullWidth
             margin="normal"
           />
+
           <TextField
+                    placeholder="url"
+
+             inputProps={{ "data-testid": "url" }}
             {...register("url", { required: true })}
             label="URL"
             variant="outlined"
@@ -80,6 +85,8 @@ const AddLink: React.FC = () => {
           />
           <FormControl fullWidth variant="outlined" margin="normal">
             <Select
+            data-testid="select"
+              //  inputProps={{ "data-testid": "category" }}
               {...register("category", { required: true })}
               label="Category"
             >
@@ -91,7 +98,7 @@ const AddLink: React.FC = () => {
             </Select>
           </FormControl>
           <Box display={"flex"} justifyContent={"space-evenly"}>
-            <Button type="submit" variant="contained" color="success">
+            <Button  type="submit" variant="contained" color="success">
               Add
             </Button>
             <Button onClick={() => nav(-1)} variant="contained" color="primary">
