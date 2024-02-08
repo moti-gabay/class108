@@ -38,7 +38,7 @@ export default function PrimarySearchAppBar() {
     }
   };
 
-  const loginReq = async (user: User) => {
+ const loginReq = async (user: User) => {
     try {
       const { data } = await axios.post(LOGIN_REQ, user);
 

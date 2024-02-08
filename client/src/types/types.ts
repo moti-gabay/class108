@@ -12,7 +12,7 @@ export interface Link {
 export type User = {
   name: string;
   password: string;
-  id: number;
+  id?: number;
   role?: string;
 };
 

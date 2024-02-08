@@ -73,7 +73,6 @@ const EditLink: React.FC = () => {
           Edit Link Form{" "}
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="name">name</label>
           <TextField
             id="name"
             inputProps={{ "data-testid": "name" }}
@@ -83,7 +82,6 @@ const EditLink: React.FC = () => {
             fullWidth
             margin="normal"
           />
-          <label htmlFor="url">url</label>
 
           <TextField
                       inputProps={{ "data-testid": "url" }}

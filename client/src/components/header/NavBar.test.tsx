@@ -3,6 +3,9 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import NavBar from './NavBar';
 import '@testing-library/jest-dom';
+// import axios from 'axios';
+// import { User } from '../../types/types';
+// import { LOGIN_REQ, TOKEN_KEY } from '../../constants/url';
 
 
 test('renders NavBar component', () => {
@@ -81,3 +84,51 @@ test('renders NavBar component', () => {
     //     expect(loginForm).toBeInTheDocument();
     //  });
     // });
+    
+jest.mock('axios');
+
+// describe('loginReq', () => {
+//   it('should log in successfully and update local storage', async () => {
+//     // Mock the axios.post method to resolve with a successful response
+//     const mockPost = jest.fn().mockResolvedValue({
+//       data: {
+//         token: {
+//           role: 'admin',
+//           token: 'mock-token',
+//         },
+//       },
+//     });
+//     axios.post = mockPost;
+
+//     // Call the loginReq function with a mock user object
+//     const mockUser: User = {
+//       name: 'Test User',
+//       password: 'password123',
+//     };
+//     await NavBar.loginReq(mockUser);
+
+//     // Assert that axios.post was called with the correct arguments
+//     expect(mockPost).toHaveBeenCalledWith(LOGIN_REQ, mockUser);
+
+//     // Assert that local storage was updated correctly
+//     expect(localStorage.getItem(TOKEN_KEY)).toEqual('mock-token');
+//   });
+
+//   it('should handle login failure', async () => {
+//     // Mock the axios.post method to reject with an error
+//     const mockPost = jest.fn().mockRejectedValue(new Error('Login failed'));
+//     axios.post = mockPost;
+
+//     // Call the loginReq function with a mock user object
+//     const mockUser: User = {
+//       name: 'Test User',
+//       password: 'wrong-password',
+//     };
+//     try {
+//       await NavBar.loginReq(mockUser);
+//     } catch (error) {
+//       // Assert that an error was thrown
+//       expect(error).toEqual(new Error('Login failed'));
+//     }
+//   });
+// });
