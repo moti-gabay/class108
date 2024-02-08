@@ -62,7 +62,9 @@ const AddLink: React.FC = () => {
           Add Link Form
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="name"></label>
           <TextField
+          id="name"
           // data-testid="name"
           placeholder="name"
              inputProps={{ "data-testid": "name" }}
