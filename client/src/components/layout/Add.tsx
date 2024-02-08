@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Add = () => {
   const nav = useNavigate();
 
-  const [add, setAdd] = useState(false);
+  const [add, setAdd] = useState(true);
   
  
   return (
