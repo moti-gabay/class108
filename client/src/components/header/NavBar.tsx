@@ -41,10 +41,11 @@ export default function PrimarySearchAppBar() {
  const loginReq = async (user: User) => {
     try {
       const { data } = await axios.post(LOGIN_REQ, user);
-
       if (data.token.role === "admin") {
         localStorage.setItem(TOKEN_KEY, data.token.token);
         setIsGust(false);
+      }else{
+        setIsGust(true)
       }
     } catch (error) {
       console.log(error);
