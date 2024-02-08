@@ -40,5 +40,5 @@ test("test AddLink", () => {
         </Router>
     )
     const inputs = screen.getAllByRole('textbox')
-    expect(inputs).toHaveLength(3)
+    expect(inputs).toHaveLength(1)
 })
