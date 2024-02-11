@@ -18,7 +18,9 @@ const AuthAdmin = () => {
           console.log(data);
                   
         } catch (error) {  
-          nav('*');
+          console.log(error);
+          
+          nav('/');
         }
       };
 

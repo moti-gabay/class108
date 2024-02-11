@@ -18,8 +18,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../../types/types";
 import { LOGIN_REQ, TOKEN_KEY } from "../../constants/url";
 import axios from "axios";
-
-export default function PrimarySearchAppBar() {
+type Props = {
+  isGust?: boolean
+}
+export default function PrimarySearchAppBar(props: Props) {
   const [isGust, setIsGust] = useState(false);
   const nav = useNavigate();
 
@@ -31,20 +33,20 @@ export default function PrimarySearchAppBar() {
   } = useForm<User>();
 
   const getToken = () => {
-    if(localStorage.getItem(TOKEN_KEY)){
+    if (localStorage.getItem(TOKEN_KEY)) {
       setIsGust(false);
-    }else{
+    } else {
       setIsGust(true)
     }
   };
 
- const loginReq = async (user: User) => {
+  const loginReq = async (user: User) => {
     try {
       const { data } = await axios.post(LOGIN_REQ, user);
       if (data.token.role === "admin") {
         localStorage.setItem(TOKEN_KEY, data.token.token);
         setIsGust(false);
-      }else{
+      } else {
         setIsGust(true)
       }
     } catch (error) {
@@ -84,6 +86,8 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           <img
+            data-testid="logo-image"
+
             onClick={() => nav("/")}
             src={img}
             style={{
@@ -96,12 +100,15 @@ export default function PrimarySearchAppBar() {
           />
           <Box sx={{ textAlign: "canter", flexGrow: 1 }} />
 
-          {isGust && 
+          {props.isGust || isGust &&
             <Dropdown>
-              <MenuButton sx={{ background: blue[400], borderRadius: "10%" }}>
+              <MenuButton  data-testid="image-login" sx={{ background: blue[400], borderRadius: "10%" }}>
                 <Icon style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={userImg} alt="" />
+                  <img data-testid="image-login"
+                    src={userImg} alt="" />
+                    {/* "image-login" */}
                 </Icon>{" "}
+                image-login
               </MenuButton>
 
               <Menu sx={{ width: "250px", height: "220px", margin: "0 auto" }}>
@@ -115,12 +122,13 @@ export default function PrimarySearchAppBar() {
                   login
                 </Typography>
                 <form
+                 role="form"
                   onSubmit={handleSubmit(onSubmit)}
                   style={{ padding: "20px", display: "" }}
                 >
-                
+
                   <Input
-                  id="name"
+                    id="name"
                     {...register("name", {
                       required: { value: true, message: "Name required" },
                       minLength: { value: 2, message: "min 2 chars" },
@@ -139,10 +147,10 @@ export default function PrimarySearchAppBar() {
                       {errors.name.message}
                     </p>
                   )}
-                 
+
 
                   <Input
-                  id="password"
+                    id="password"
                     {...register("password", {
                       required: { value: true, message: "password required" },
                       minLength: { value: 2, message: "min 2 chars" },
@@ -163,6 +171,7 @@ export default function PrimarySearchAppBar() {
                   )}
 
                   <Button
+                  data-testid="login-btn"
                     type="submit"
                     size="small"
                     sx={{ padding: "3px", margin: "10px 80px" }}
@@ -174,16 +183,16 @@ export default function PrimarySearchAppBar() {
               </Menu>
             </Dropdown>
           }
-      {  !isGust &&    <Button
-              sx={{ background: blue[400] }}
-              onClick={() => nav("/addLink")}
-              variant="contained"
-            >
-              <Icon style={{ display: "flex", justifyContent: "center" }}>
-                <PlusIcon fontSize="small" style={{}} />
-              </Icon>
-            </Button>}
-          
+          {!isGust && <Button
+            sx={{ background: blue[400] }}
+            onClick={() => nav("/addLink")}
+            variant="contained"
+          >
+            <Icon style={{ display: "flex", justifyContent: "center" }}>
+              <PlusIcon fontSize="small" style={{}} />
+            </Icon>
+          </Button>}
+
         </Toolbar>
       </AppBar>
     </Box>

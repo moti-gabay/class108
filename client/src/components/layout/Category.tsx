@@ -1,6 +1,6 @@
 import { Container, Input, Typography, alpha, styled } from "@mui/material";
 import CardLink from "./CardLink";
-import {  blue } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -83,7 +83,7 @@ const Categories = () => {
   useEffect(() => {
     getCategoryReq();
     getLinksReq();
-  }, [search,localStorage.getItem(TOKEN_KEY)]);
+  }, [search, localStorage.getItem(TOKEN_KEY)]);
   return (
     <div>
       <Search
@@ -109,10 +109,12 @@ const Categories = () => {
             />
           )}
         </SearchIconWrapper>
+        <label htmlFor="search">Search</label>
         <Input
+          id="search"
           sx={{ paddingX: "5px" }}
           value={search}
-          placeholder="  Search....  "
+          placeholder="Search"
           onInput={input}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -122,7 +124,7 @@ const Categories = () => {
       {search !== "" && (
         <div>
           <Typography style={{ textAlign: "center" }} variant="h5">
-        Search Results:
+            Search Results:
           </Typography>{" "}
           <Container
             sx={{
@@ -133,31 +135,34 @@ const Categories = () => {
               flexWrap: "nowrap",
               overflow: "auto",
               padding: "10px",
-             
+
             }}
           >
+            <p>
+              {search}
+            </p>
             {search !== ""
               ? filterLinks.map((linked) => {
-                  return (
-                    <Grid
-                      key={linked._id}
-                      sx={{ flex: "0 0 auto", marginRight: 2 }}
-                    >
-                      <CardLink
-                        name={linked.name}
-                        category={linked.category}
-                        url={linked.url}
-                        _id={linked._id}
-                      />
-                    </Grid>
-                  );
-                })
+                return (
+                  <Grid
+                    key={linked._id}
+                    sx={{ flex: "0 0 auto", marginRight: 2 }}
+                  >
+                    <CardLink
+                      name={linked.name ? linked.name : "defult name"}
+                      category={linked.category ? linked.category : "defult Category"}
+                      url={linked.url ? linked.url : "defult url"}
+                      _id={linked._id}
+                    />
+                  </Grid>
+                );
+              })
               : "אין תוצאות חיפוש..."}
           </Container>
         </div>
       )}
 
-      <Container sx={{ padding: "20px", width: "85%",height:"auto" }}>
+      <Container sx={{ padding: "20px", width: "85%", height: "auto" }}>
         {categories.map(({ name, _id }) => {
           return (
             <Accordion
@@ -175,7 +180,7 @@ const Categories = () => {
                   color={"white"}
                   fontWeight="fontWeightBold"
                 >
-                  { name}
+                  {name}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails

@@ -36,11 +36,11 @@ const AddCategory = () => {
 
   return (
     <FormControl
-      sx={{ width: "400px", height: "auto", padding: "60px" }}
+      sx={{ width: "30%", height: "40vh" }}
     >
       <Card sx={{ background: blue[200] }}>
         <Typography variant="h4" sx={{ textAlign: "center" }}>
-          Add Category
+          Add Category form
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField

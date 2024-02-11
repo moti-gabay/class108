@@ -1,4 +1,3 @@
-import {  useState } from "react";
 import AddLink from "../../forms/addLink";
 import AddCategory from "../../forms/AddCategory";
 import { Button } from "@mui/joy";
@@ -9,32 +8,15 @@ import { useNavigate } from "react-router-dom";
 const Add = () => {
   const nav = useNavigate();
 
-  const [add, setAdd] = useState(false);
   
  
   return (
     <div style={{ justifyContent: "center", height: "calc(100vh - 68.48px)" }}>
       <AuthAdmin />
-      <div
-        style={{
-          width: "100%",
-          height: "100px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Button
-          sx={{ width: "10%", fontSize: "20px" }}
-          onClick={() => setAdd(!add)}
-          color="danger"
-        >
-          Add {add ? "category" : "link"}
-        </Button>
-      </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        {add && <AddLink />}
-        {!add && <AddCategory />}
+     
+      <div style={{ display: "flex", justifyContent: "center",alignItems:"center" }}>
+     <AddLink />
+     <AddCategory />
       </div>
       <Button
         sx={{
