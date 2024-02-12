@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
+// import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -27,6 +27,7 @@ const AddLink: React.FC = () => {
   const nav = useNavigate();
 
   const [categories, setCategories] = React.useState<Category[]>([]);
+
   const getCategoryReq = async () => {
     try {
       const { data } = await axios.get(CATEGORY_LIST_ROUTE);
@@ -49,7 +50,7 @@ const AddLink: React.FC = () => {
           "x-api-key": localStorage[TOKEN_KEY] || "",
         },
       });
-      
+      alert("Link added successfully")
     } catch (error) {
       console.log(error);
     }
@@ -64,21 +65,22 @@ const AddLink: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="name"></label>
           <TextField
-          id="name"
-          // data-testid="name"
-          placeholder="name"
-             inputProps={{ "data-testid": "name" }}
+            id="name"
+            // data-testid="name"
+            placeholder="name"
+            inputProps={{ "data-testid": "name" }}
             {...register("name", { required: true })}
             label="Name"
             variant="outlined"
             fullWidth
             margin="normal"
           />
+          <label htmlFor="url"></label>
 
           <TextField
-                    placeholder="url"
-
-             inputProps={{ "data-testid": "url" }}
+            placeholder="url"
+            id="url"
+            inputProps={{ "data-testid": "url" }}
             {...register("url", { required: true })}
             label="URL"
             variant="outlined"
@@ -86,21 +88,24 @@ const AddLink: React.FC = () => {
             margin="normal"
           />
           <FormControl fullWidth variant="outlined" margin="normal">
-            <Select
-            data-testid="select"
+            <label htmlFor="category">category</label>
+          {  categories &&   <select
+              id="category"
+              value={'select'}
+              data-testid="select"
               //  inputProps={{ "data-testid": "category" }}
               {...register("category", { required: true })}
-              label="Category"
+            // label="Category"
             >
-              {categories?.map((cate) => (
-                <MenuItem key={cate._id} value={cate.name}>
-                  {cate.name}
-                </MenuItem>
+              {categories && categories.map((cate) => (
+                <option key={cate._id } value={cate.name ? cate.name : "test cate"}>
+                  {cate.name ? cate.name : "test cate"}
+                </option>
               ))}
-            </Select>
+            </select>}
           </FormControl>
           <Box display={"flex"} justifyContent={"space-evenly"}>
-            <Button  type="submit" variant="contained" color="success">
+            <Button type="submit" variant="contained" color="success">
               Add
             </Button>
             <Button onClick={() => nav(-1)} variant="contained" color="primary">

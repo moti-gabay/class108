@@ -165,7 +165,9 @@ const Categories = () => {
       <Container sx={{ padding: "20px", width: "85%", height: "auto" }}>
         {categories.map(({ name, _id }) => {
           return (
-            <Accordion
+            <div key={_id}  data-testid={`category-${_id}`}>
+              cat
+  <Accordion
               style={{ background: blue[300], textAlign: "center" }}
               key={_id}
             >
@@ -204,6 +206,8 @@ const Categories = () => {
                 )}
               </AccordionDetails>
             </Accordion>
+            </div>
+          
           );
         })}
       </Container>

@@ -94,7 +94,7 @@ const EditLink: React.FC = () => {
           />
           <FormControl fullWidth variant="outlined" margin="normal">
             <Select {...register("category")} label="category">
-              {categories.map((cate) => (
+              {categories?.map((cate) => (
                 <MenuItem key={cate._id} value={cate.name}>
                   {cate.name}
                 </MenuItem>
