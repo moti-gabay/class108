@@ -22,23 +22,44 @@ const EditLink: React.FC = () => {
   const { id } = useParams();
   const nav = useNavigate();
 
-  const { register, handleSubmit, setValue } = useForm<Link>();
+  const { register, handleSubmit, setValue } = useForm<Link>({
+    defaultValues: {
+      category: 'defult category', // Set a default value here
+      // ... other fields
+    }
+  });
   const [categories, setCategories] = React.useState<Category[]>([]);
 
   const getLinkInfo = async () => {
     try {
-      const { data } = await axios.get(LINK_INFO_ROUTE + id);
-      setValue("name", data.name);
-      setValue("url", data.url);
-      setValue("category", data.category);
+      const response = await axios.get(LINK_INFO_ROUTE + id);
+      if (response && response.data) {
+        setValue("name", response.data.name);
+        setValue("url", response.data.url);
+        setValue("category", response.data.category);
+        console.log("get link info in real");
+        
+      } else {
+        console.log('Unexpected response format:', response);
+      }
     } catch (error) {
-      console.log(error);
+      console.log('Error fetching link info:', error);
     }
   };
 
   const getCategoryReq = async () => {
-    const { data } = await axios.get(CATEGORY_LIST_ROUTE);
-    setCategories(data);
+    try {
+      const response = await axios.get(CATEGORY_LIST_ROUTE);
+      if (response && response.data) {
+        setCategories(response.data);
+        console.log("get category lisk in real");
+
+      } else {
+        console.log('Unexpected response format:', response);
+      }
+    } catch (error) {
+      console.log('Error fetching categories:', error);
+    }
   };
   useEffect(() => {
     getCategoryReq();
@@ -49,11 +70,13 @@ const EditLink: React.FC = () => {
     const dataCopy = { ...data } as Partial<Link>;
     delete dataCopy._id;
     try {
-      await axios.put(EDIT_LINK_ROUTE + id, dataCopy, {
+      const { data } = await axios.put(EDIT_LINK_ROUTE + id, dataCopy, {
         headers: {
           "x-api-key": localStorage[TOKEN_KEY],
         },
       });
+      console.log(data);
+
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +107,7 @@ const EditLink: React.FC = () => {
           />
 
           <TextField
-                      inputProps={{ "data-testid": "url" }}
+            inputProps={{ "data-testid": "url" }}
 
             {...register("url")}
             label="url"
@@ -93,7 +116,7 @@ const EditLink: React.FC = () => {
             margin="normal"
           />
           <FormControl fullWidth variant="outlined" margin="normal">
-            <Select {...register("category")} label="category">
+            <Select defaultValue={""}  {...register("category")} label="category">
               {categories?.map((cate) => (
                 <MenuItem key={cate._id} value={cate.name}>
                   {cate.name}

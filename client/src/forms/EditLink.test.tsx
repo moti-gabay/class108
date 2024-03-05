@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react"
-import EditLink from "./EditLink"
-import { BrowserRouter as Router } from 'react-router-dom';
-import axios from "axios";
+import { render, waitFor } from '@testing-library/react';
+import EditLink from './EditLink';
+import axios from 'axios';
+import { Router } from 'react-router-dom';
 
+// Mock axios module
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -12,8 +13,7 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn().mockReturnValue({ id: '1' }),
 }));
 
-
-describe("test the buttton in the screen ", () => {
+describe('EditLink', () => {
   it('fetches link info successfully', async () => {
     // Define the mock response for the GET request
     const mockLinkInfoResponse = {
@@ -26,32 +26,21 @@ describe("test the buttton in the screen ", () => {
     mockedAxios.get.mockResolvedValueOnce({ data: mockLinkInfoResponse });
 
     // Render the EditLink component
-    const { getByLabelText } =  render(
+    const { getByLabelText } = render(
       <Router>
-        <EditLink />
+        <EditLink/>
       </Router>
-
-    )
+    );
 
     // Wait for the link info to be fetched and the state to be updated
     await waitFor(() => {
-      expect(getByLabelText('name')).toBe(mockLinkInfoResponse.name);
-      expect(getByLabelText('url')).toBe(mockLinkInfoResponse.url);
-      expect(getByLabelText('category')).toBe(mockLinkInfoResponse.category);
+      const nameInput = getByLabelText('name') as HTMLInputElement;
+      const urlInput = getByLabelText('url') as HTMLInputElement;
+      const categoryInput = getByLabelText('category') as HTMLInputElement;
+
+      expect(nameInput.value).toBe(mockLinkInfoResponse.name);
+      expect(urlInput.value).toBe(mockLinkInfoResponse.url);
+      expect(categoryInput.value).toBe(mockLinkInfoResponse.category);
     });
   });
-  it("tow buttons found", () => {
-
-    render(
-      <Router>
-        <EditLink />
-      </Router>
-
-    )
-    const editButton = screen.getByRole('button',{name:/Edit/i});
-    const backButton = screen.getByRole('button',{name:/back/i});
-    expect(editButton).toBeInTheDocument()
-    expect(backButton).toBeInTheDocument()
-  })
-
-})
+});

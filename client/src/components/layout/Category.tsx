@@ -71,6 +71,7 @@ const Categories = () => {
   const getCategoryReq = async () => {
     const { data } = await axios.get(CATEGORY_LIST_ROUTE);
     setCategory(data);
+    console.log(data)
   };
 
   const input = () => {
